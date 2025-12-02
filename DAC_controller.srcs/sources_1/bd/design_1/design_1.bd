@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x4A0A91A8E09F51FD",
+      "boundary_crc": "0x4A0A91A85D5165C2",
       "device": "xc7z020clg400-1",
       "gen_directory": "../../../../DAC_controller.gen/sources_1/bd/design_1",
       "name": "design_1",
@@ -18,22 +18,6 @@
       "xlconcat_0": ""
     },
     "ports": {
-      "sw1": {
-        "type": "rst",
-        "direction": "I",
-        "parameters": {
-          "POLARITY": {
-            "value": "ACTIVE_HIGH"
-          }
-        }
-      },
-      "sysclk": {
-        "type": "clk",
-        "direction": "I"
-      },
-      "sw0": {
-        "direction": "I"
-      },
       "ja2": {
         "direction": "O"
       },
@@ -55,6 +39,22 @@
       },
       "led0": {
         "direction": "O"
+      },
+      "sysclk": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "FREQ_HZ": {
+            "value": "125000000"
+          }
+        }
+      },
+      "sw0": {
+        "type": "intr",
+        "direction": "I"
+      },
+      "sw1": {
+        "direction": "I"
       }
     },
     "components": {
@@ -63,7 +63,27 @@
         "ip_revision": "14",
         "xci_name": "design_1_clk_wiz_0_0",
         "xci_path": "ip/design_1_clk_wiz_0_0/design_1_clk_wiz_0_0.xci",
-        "inst_hier_path": "clk_wiz_0"
+        "inst_hier_path": "clk_wiz_0",
+        "parameters": {
+          "CLKIN1_JITTER_PS": {
+            "value": "80.0"
+          },
+          "CLKOUT1_JITTER": {
+            "value": "124.615"
+          },
+          "CLKOUT1_PHASE_ERROR": {
+            "value": "96.948"
+          },
+          "MMCM_CLKFBOUT_MULT_F": {
+            "value": "8.000"
+          },
+          "MMCM_CLKIN1_PERIOD": {
+            "value": "8.000"
+          },
+          "PRIM_IN_FREQ": {
+            "value": "125.00"
+          }
+        }
       },
       "pmod_dac_ad5541a_0": {
         "vlnv": "xilinx.com:module_ref:pmod_dac_ad5541a:1.0",
@@ -184,37 +204,25 @@
         "inst_hier_path": "xlconcat_0",
         "parameters": {
           "IN0_WIDTH": {
-            "value": "12"
+            "value": "4"
           },
           "IN1_WIDTH": {
-            "value": "4"
+            "value": "12"
           }
         }
       }
     },
     "nets": {
-      "btn_1": {
-        "ports": [
-          "sw0",
-          "button_debounce_0/button_in"
-        ]
-      },
       "btn_2": {
         "ports": [
           "btn",
-          "xlconcat_0/In1"
+          "xlconcat_0/In0"
         ]
       },
       "button_debounce_0_button_out": {
         "ports": [
           "button_debounce_0/button_out",
           "pmod_dac_ad5541a_0/dac_tx_ena"
-        ]
-      },
-      "clk_in1_0_1": {
-        "ports": [
-          "sysclk",
-          "clk_wiz_0/clk_in1"
         ]
       },
       "clk_wiz_0_clk_out1": {
@@ -262,6 +270,18 @@
           "pmod_dac_ad5541a_0/reset_n"
         ]
       },
+      "sw0_1": {
+        "ports": [
+          "sw0",
+          "button_debounce_0/button_in"
+        ]
+      },
+      "sysclk_1": {
+        "ports": [
+          "sysclk",
+          "clk_wiz_0/clk_in1"
+        ]
+      },
       "xlconcat_0_dout": {
         "ports": [
           "xlconcat_0/dout",
@@ -277,7 +297,7 @@
       "xlconstant_1_dout": {
         "ports": [
           "xlconstant_1/dout",
-          "xlconcat_0/In0"
+          "xlconcat_0/In1"
         ]
       }
     }
