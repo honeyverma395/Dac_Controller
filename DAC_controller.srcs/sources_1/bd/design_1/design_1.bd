@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x8C012FA9A5C5E589",
+      "boundary_crc": "0x4A0A91A8E09F51FD",
       "device": "xc7z020clg400-1",
       "gen_directory": "../../../../DAC_controller.gen/sources_1/bd/design_1",
       "name": "design_1",
@@ -12,10 +12,13 @@
     "design_tree": {
       "clk_wiz_0": "",
       "pmod_dac_ad5541a_0": "",
-      "button_debounce_0": ""
+      "button_debounce_0": "",
+      "xlconstant_0": "",
+      "xlconstant_1": "",
+      "xlconcat_0": ""
     },
     "ports": {
-      "reset_0": {
+      "sw1": {
         "type": "rst",
         "direction": "I",
         "parameters": {
@@ -24,26 +27,33 @@
           }
         }
       },
-      "clk_in1_0": {
+      "sysclk": {
         "type": "clk",
         "direction": "I"
       },
-      "btn": {
+      "sw0": {
         "direction": "I"
       },
-      "Data_in": {
-        "direction": "I"
-      },
-      "ja": {
+      "ja2": {
         "direction": "O"
       },
       "ja1": {
         "direction": "O"
       },
-      "ja2": {
+      "ja3": {
         "direction": "O"
       },
-      "ja3": {
+      "ja0": {
+        "direction": "O",
+        "left": "0",
+        "right": "0"
+      },
+      "btn": {
+        "direction": "I",
+        "left": "0",
+        "right": "3"
+      },
+      "led0": {
         "direction": "O"
       }
     },
@@ -138,13 +148,61 @@
             "direction": "O"
           }
         }
+      },
+      "xlconstant_0": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "ip_revision": "9",
+        "xci_name": "design_1_xlconstant_0_0",
+        "xci_path": "ip/design_1_xlconstant_0_0/design_1_xlconstant_0_0.xci",
+        "inst_hier_path": "xlconstant_0",
+        "parameters": {
+          "CONST_VAL": {
+            "value": "0"
+          }
+        }
+      },
+      "xlconstant_1": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "ip_revision": "9",
+        "xci_name": "design_1_xlconstant_1_1",
+        "xci_path": "ip/design_1_xlconstant_1_1/design_1_xlconstant_1_1.xci",
+        "inst_hier_path": "xlconstant_1",
+        "parameters": {
+          "CONST_VAL": {
+            "value": "1234"
+          },
+          "CONST_WIDTH": {
+            "value": "12"
+          }
+        }
+      },
+      "xlconcat_0": {
+        "vlnv": "xilinx.com:ip:xlconcat:2.1",
+        "ip_revision": "6",
+        "xci_name": "design_1_xlconcat_0_0",
+        "xci_path": "ip/design_1_xlconcat_0_0/design_1_xlconcat_0_0.xci",
+        "inst_hier_path": "xlconcat_0",
+        "parameters": {
+          "IN0_WIDTH": {
+            "value": "12"
+          },
+          "IN1_WIDTH": {
+            "value": "4"
+          }
+        }
       }
     },
     "nets": {
       "btn_1": {
         "ports": [
-          "btn",
+          "sw0",
           "button_debounce_0/button_in"
+        ]
+      },
+      "btn_2": {
+        "ports": [
+          "btn",
+          "xlconcat_0/In1"
         ]
       },
       "button_debounce_0_button_out": {
@@ -155,7 +213,7 @@
       },
       "clk_in1_0_1": {
         "ports": [
-          "clk_in1_0",
+          "sysclk",
           "clk_wiz_0/clk_in1"
         ]
       },
@@ -169,19 +227,19 @@
       "pmod_dac_ad5541a_0_busy": {
         "ports": [
           "pmod_dac_ad5541a_0/busy",
-          "ja"
+          "led0"
         ]
       },
       "pmod_dac_ad5541a_0_ldac_n": {
         "ports": [
           "pmod_dac_ad5541a_0/ldac_n",
-          "ja1"
+          "ja2"
         ]
       },
       "pmod_dac_ad5541a_0_mosi": {
         "ports": [
           "pmod_dac_ad5541a_0/mosi",
-          "ja2"
+          "ja1"
         ]
       },
       "pmod_dac_ad5541a_0_sclk": {
@@ -190,12 +248,36 @@
           "ja3"
         ]
       },
+      "pmod_dac_ad5541a_0_ss_n": {
+        "ports": [
+          "pmod_dac_ad5541a_0/ss_n",
+          "ja0"
+        ]
+      },
       "reset_0_1": {
         "ports": [
-          "reset_0",
+          "sw1",
           "clk_wiz_0/reset",
           "button_debounce_0/reset",
           "pmod_dac_ad5541a_0/reset_n"
+        ]
+      },
+      "xlconcat_0_dout": {
+        "ports": [
+          "xlconcat_0/dout",
+          "pmod_dac_ad5541a_0/dac_data"
+        ]
+      },
+      "xlconstant_0_dout": {
+        "ports": [
+          "xlconstant_0/dout",
+          "pmod_dac_ad5541a_0/update_output_n"
+        ]
+      },
+      "xlconstant_1_dout": {
+        "ports": [
+          "xlconstant_1/dout",
+          "xlconcat_0/In0"
         ]
       }
     }

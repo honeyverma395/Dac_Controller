@@ -95,11 +95,13 @@ BEGIN
     VARIABLE count : INTEGER RANGE 0 TO clk_freq*100 := 0; --comptador
   BEGIN
   
-    IF(reset = '1') THEN                   --reset actiu
+    IF(reset = '1') THEN                     --reset actiu
       spi_ena <= '0';                        --desactiva el SPI
       spi_tx_data <= (OTHERS => '0');        --neteja dades
       busy <= '1';                           --mòdul no disponible
       state <= start;                        --retorna a l'estat inicial
+      spi_busy_prev <= '0';                  --inicialitza l'estat previ del busy del SPI
+      count:= 0;                             --reinicia el comptador
 
     ELSIF rising_edge(clk) THEN 
     
