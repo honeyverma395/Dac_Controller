@@ -10,7 +10,7 @@ ENTITY spi_master IS
   );
   PORT(
     clock   : IN     STD_LOGIC;
-    reset_n : IN     STD_LOGIC;
+    reset   : IN     STD_LOGIC;
 
     enable  : IN     STD_LOGIC;                             --iniciar transmissió
     cpol    : IN     STD_LOGIC;                             --polaritat del SCLK
@@ -19,7 +19,7 @@ ENTITY spi_master IS
     clk_div : IN     INTEGER;                               --divisor de freqüència per SCLK (quantes oscil·lacions tenim del clk per 1/2 periode de sclk)
     addr    : IN     INTEGER;                               --adreça del slave actiu
 
-    tx_data : IN     STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);  --paraula a transmetre
+    tx_data : IN     STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);  --info a transmetre
     miso    : IN     STD_LOGIC;                             --dada rebuda del slave
 
     sclk    : BUFFER STD_LOGIC;                             --sortida del clock SPI
@@ -50,10 +50,10 @@ ARCHITECTURE logic OF spi_master IS
 
 BEGIN
 
-  PROCESS(clock, reset_n)
+  PROCESS(clock, reset)
   BEGIN
     -- RESET 
-    IF reset_n = '0' THEN
+    IF reset = '1' THEN
       busy      <= '1';
       ss_n      <= (OTHERS => '1');
       mosi      <= 'Z';

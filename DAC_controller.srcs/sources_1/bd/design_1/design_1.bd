@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x3E88D8C1B39BC805",
+      "boundary_crc": "0x8C012FA9A5C5E589",
       "device": "xc7z020clg400-1",
       "gen_directory": "../../../../DAC_controller.gen/sources_1/bd/design_1",
       "name": "design_1",
@@ -10,7 +10,9 @@
       "tool_version": "2024.1"
     },
     "design_tree": {
-      "clk_wiz_0": ""
+      "clk_wiz_0": "",
+      "pmod_dac_ad5541a_0": "",
+      "button_debounce_0": ""
     },
     "ports": {
       "reset_0": {
@@ -25,6 +27,24 @@
       "clk_in1_0": {
         "type": "clk",
         "direction": "I"
+      },
+      "btn": {
+        "direction": "I"
+      },
+      "Data_in": {
+        "direction": "I"
+      },
+      "ja": {
+        "direction": "O"
+      },
+      "ja1": {
+        "direction": "O"
+      },
+      "ja2": {
+        "direction": "O"
+      },
+      "ja3": {
+        "direction": "O"
       }
     },
     "components": {
@@ -34,19 +54,148 @@
         "xci_name": "design_1_clk_wiz_0_0",
         "xci_path": "ip/design_1_clk_wiz_0_0/design_1_clk_wiz_0_0.xci",
         "inst_hier_path": "clk_wiz_0"
+      },
+      "pmod_dac_ad5541a_0": {
+        "vlnv": "xilinx.com:module_ref:pmod_dac_ad5541a:1.0",
+        "ip_revision": "1",
+        "xci_name": "design_1_pmod_dac_ad5541a_0_0",
+        "xci_path": "ip/design_1_pmod_dac_ad5541a_0_0/design_1_pmod_dac_ad5541a_0_0.xci",
+        "inst_hier_path": "pmod_dac_ad5541a_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "pmod_dac_ad5541a",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I"
+          },
+          "reset_n": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "dac_tx_ena": {
+            "direction": "I"
+          },
+          "dac_data": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "update_output_n": {
+            "direction": "I"
+          },
+          "busy": {
+            "direction": "O"
+          },
+          "ldac_n": {
+            "direction": "O"
+          },
+          "mosi": {
+            "direction": "O"
+          },
+          "sclk": {
+            "direction": "O"
+          },
+          "ss_n": {
+            "direction": "O",
+            "left": "0",
+            "right": "0"
+          }
+        }
+      },
+      "button_debounce_0": {
+        "vlnv": "xilinx.com:module_ref:button_debounce:1.0",
+        "ip_revision": "1",
+        "xci_name": "design_1_button_debounce_0_0",
+        "xci_path": "ip/design_1_button_debounce_0_0/design_1_button_debounce_0_0.xci",
+        "inst_hier_path": "button_debounce_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "button_debounce",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "reset",
+                "value_src": "constant"
+              }
+            }
+          },
+          "reset": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "button_in": {
+            "direction": "I"
+          },
+          "button_out": {
+            "direction": "O"
+          }
+        }
       }
     },
     "nets": {
+      "btn_1": {
+        "ports": [
+          "btn",
+          "button_debounce_0/button_in"
+        ]
+      },
+      "button_debounce_0_button_out": {
+        "ports": [
+          "button_debounce_0/button_out",
+          "pmod_dac_ad5541a_0/dac_tx_ena"
+        ]
+      },
       "clk_in1_0_1": {
         "ports": [
           "clk_in1_0",
           "clk_wiz_0/clk_in1"
         ]
       },
+      "clk_wiz_0_clk_out1": {
+        "ports": [
+          "clk_wiz_0/clk_out1",
+          "pmod_dac_ad5541a_0/clk",
+          "button_debounce_0/clk"
+        ]
+      },
+      "pmod_dac_ad5541a_0_busy": {
+        "ports": [
+          "pmod_dac_ad5541a_0/busy",
+          "ja"
+        ]
+      },
+      "pmod_dac_ad5541a_0_ldac_n": {
+        "ports": [
+          "pmod_dac_ad5541a_0/ldac_n",
+          "ja1"
+        ]
+      },
+      "pmod_dac_ad5541a_0_mosi": {
+        "ports": [
+          "pmod_dac_ad5541a_0/mosi",
+          "ja2"
+        ]
+      },
+      "pmod_dac_ad5541a_0_sclk": {
+        "ports": [
+          "pmod_dac_ad5541a_0/sclk",
+          "ja3"
+        ]
+      },
       "reset_0_1": {
         "ports": [
           "reset_0",
-          "clk_wiz_0/reset"
+          "clk_wiz_0/reset",
+          "button_debounce_0/reset",
+          "pmod_dac_ad5541a_0/reset_n"
         ]
       }
     }

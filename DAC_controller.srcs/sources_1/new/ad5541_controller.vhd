@@ -7,7 +7,7 @@ ENTITY pmod_dac_ad5541a IS
     spi_clk_div : INTEGER := 1);  --divisor per generar el rellotge SPI (clk_freq/100, arrodonit)
   PORT(
     clk             : IN      STD_LOGIC;                      --rellotge del sistema
-    reset_n         : IN      STD_LOGIC;                      --reset 
+    reset           : IN      STD_LOGIC;                      --reset 
     dac_tx_ena      : IN      STD_LOGIC;                      --petició d'enviament de dades al DAC
     dac_data        : IN      STD_LOGIC_VECTOR(15 DOWNTO 0);  --valor a enviar al DAC
     update_output_n : IN      STD_LOGIC;                      --controla quan el DAC actualitza la sortida
@@ -34,7 +34,7 @@ ARCHITECTURE behavior OF pmod_dac_ad5541a IS
       d_width : INTEGER := 16); --amplada de la paraula a transmetre
     PORT(
       clock   : IN     STD_LOGIC;                             --rellotge del sistema
-      reset_n : IN     STD_LOGIC;                             --reset asíncron
+      reset   : IN     STD_LOGIC;                             --reset asíncron
       enable  : IN     STD_LOGIC;                             --inicia la transacció SPI
       cpol    : IN     STD_LOGIC;                             --polaritat del rellotge SPI
       cpha    : IN     STD_LOGIC;                             --fase del rellotge SPI
@@ -67,7 +67,7 @@ BEGIN
   spi_master_0: spi_master
     GENERIC MAP(slaves => 1, d_width => 16)
     PORT MAP(clock      => clk, 
-             reset_n    => reset_n, 
+             reset      => reset, 
              enable     => spi_ena, 
              cpol       => '0', 
              cpha       => '0',
@@ -84,18 +84,18 @@ BEGIN
              
   tx_button_controller: button_debounce
     PORT MAP(clk           => clk, 
-             reset         => reset_n, 
+             reset         => reset, 
              button_in     => dac_tx_ena, 
              button_out    => button_pressed);
 
   ldac_n <= update_output_n;  --'0' fa que el DAC actualitzi la sortida amb el valor recent enviat (Active low)
 
   -- FSM del controlador del DAC
-  PROCESS(clk, reset_n)
+  PROCESS(clk, reset)
     VARIABLE count : INTEGER RANGE 0 TO clk_freq*100 := 0; --comptador
   BEGIN
   
-    IF(reset_n = '0') THEN                   --reset actiu
+    IF(reset = '1') THEN                   --reset actiu
       spi_ena <= '0';                        --desactiva el SPI
       spi_tx_data <= (OTHERS => '0');        --neteja dades
       busy <= '1';                           --mòdul no disponible
@@ -143,7 +143,7 @@ BEGIN
           ELSIF(spi_busy = '1') THEN
             spi_ena <= '0';                  --treiem enable per no reiniciar-la
             
-          --si busy torna a 0 → transacció finalitzada
+          --si busy torna a 0, transacció finalitzada
           ELSE
             state <= pause;                  --retorna al temps de pausa
           END IF;
