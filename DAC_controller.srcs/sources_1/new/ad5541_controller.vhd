@@ -25,7 +25,7 @@ ARCHITECTURE behavior OF pmod_dac_ad5541a IS
   SIGNAL spi_busy      : STD_LOGIC;                           --senyal busy del SPI
   SIGNAL spi_ena       : STD_LOGIC;                           --enable per activar el mòdul SPI
   SIGNAL spi_tx_data   : STD_LOGIC_VECTOR(15 DOWNTO 0);       --dades a enviar pel SPI
---  SIGNAL button_pressed: std_logic;
+  SIGNAL button_pressed: std_logic;
 --------------------------------------------------------------------
   -- Component SPI Master
   COMPONENT spi_master IS
@@ -51,14 +51,14 @@ ARCHITECTURE behavior OF pmod_dac_ad5541a IS
   END COMPONENT spi_master;
 
 --FlipsFlops del button
---  COMPONENT button_debounce IS
---   GENERIC(
---          COUNTER_SIZE : integer := 10_000);
---   PORT(  clk        : in  std_logic;
---          reset      : in  std_logic;
---          button_in  : in  std_logic;
---          button_out : out std_logic);  
---  END COMPONENT button_debounce;
+  COMPONENT button_debounce IS
+   GENERIC(
+          COUNTER_SIZE : integer := 10_000);
+   PORT(  clk        : in  std_logic;
+          reset      : in  std_logic;
+          button_in  : in  std_logic;
+          button_out : out std_logic);  
+  END COMPONENT button_debounce;
 --------------------------------------------------------------------
 
 BEGIN
@@ -82,11 +82,11 @@ BEGIN
              busy       => spi_busy, 
              rx_data    => open);
              
---  tx_button_controller: button_debounce
---    PORT MAP(clk           => clk, 
---             reset         => reset, 
---             button_in     => dac_tx_ena, 
---             button_out    => button_pressed);
+  tx_button_controller: button_debounce
+    PORT MAP(clk           => clk, 
+             reset         => reset, 
+             button_in     => dac_tx_ena, 
+             button_out    => button_pressed);
 
   ldac_n <= update_output_n;  --'0' fa que el DAC actualitzi la sortida amb el valor recent enviat (Active low)
 --  busy <= spi_busy;
@@ -131,7 +131,7 @@ BEGIN
         
         -- Estat d'espera: si rebem dac_tx_ena, preparem una transacció
         WHEN ready =>
-          IF(dac_tx_ena = '1') THEN
+          IF(button_pressed = '1') THEN
             spi_tx_data <= dac_data;         --captura les dades del DAC
             busy <= '1';                     --ara està ocupat
             state <= send_data;              --passem a enviar

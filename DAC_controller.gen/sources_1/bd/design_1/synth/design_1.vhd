@@ -2,7 +2,7 @@
 --Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
---Date        : Thu Dec  4 18:16:11 2025
+--Date        : Thu Dec  4 18:51:29 2025
 --Host        : HV-laptop running 64-bit Ubuntu 24.04.3 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -27,7 +27,7 @@ entity design_1 is
     sysclk : in STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=5,numReposBlks=5,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=1,numPkgbdBlks=0,bdsource=USER,synth_mode=Hierarchical}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=6,numReposBlks=6,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=2,numPkgbdBlks=0,bdsource=USER,synth_mode=Hierarchical}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -71,6 +71,15 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 15 downto 0 )
   );
   end component design_1_xlconcat_0_0;
+  component design_1_button_debounce_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    reset : in STD_LOGIC;
+    button_in : in STD_LOGIC;
+    button_out : out STD_LOGIC
+  );
+  end component design_1_button_debounce_0_0;
+  signal button_debounce_0_button_out : STD_LOGIC;
   signal clk_in1_0_1 : STD_LOGIC;
   signal clk_wiz_0_clk_out1 : STD_LOGIC;
   signal pmod_dac_ad5541a_0_busy : STD_LOGIC;
@@ -89,7 +98,7 @@ architecture STRUCTURE of design_1 is
   attribute X_INTERFACE_PARAMETER : string;
   attribute X_INTERFACE_PARAMETER of sw1 : signal is "XIL_INTERFACENAME RST.SW1, INSERT_VIP 0, POLARITY ACTIVE_HIGH";
   attribute X_INTERFACE_INFO of sysclk : signal is "xilinx.com:signal:clock:1.0 CLK.SYSCLK CLK";
-  attribute X_INTERFACE_PARAMETER of sysclk : signal is "XIL_INTERFACENAME CLK.SYSCLK, CLK_DOMAIN design_1_clk_in1_0, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute X_INTERFACE_PARAMETER of sysclk : signal is "XIL_INTERFACENAME CLK.SYSCLK, ASSOCIATED_RESET sw1, CLK_DOMAIN design_1_clk_in1_0, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
 begin
   clk_in1_0_1 <= sysclk;
   ja0 <= pmod_dac_ad5541a_0_ss_n;
@@ -101,6 +110,13 @@ begin
   led0 <= pmod_dac_ad5541a_0_busy;
   reset_0_1 <= sw1;
   sw0_1 <= sw0;
+button_debounce_0: component design_1_button_debounce_0_0
+     port map (
+      button_in => sw0_1,
+      button_out => button_debounce_0_button_out,
+      clk => clk_in1_0_1,
+      reset => reset_0_1
+    );
 clk_wiz_0: component design_1_clk_wiz_0_0
      port map (
       clk_in1 => clk_in1_0_1,
@@ -113,7 +129,7 @@ pmod_dac_ad5541a_0: component design_1_pmod_dac_ad5541a_0_0
       busy => pmod_dac_ad5541a_0_busy,
       clk => clk_wiz_0_clk_out1,
       dac_data(15 downto 0) => xlconcat_0_dout(15 downto 0),
-      dac_tx_ena => sw0_1,
+      dac_tx_ena => button_debounce_0_button_out,
       ldac_n => pmod_dac_ad5541a_0_ldac_n,
       mosi => pmod_dac_ad5541a_0_mosi,
       reset => reset_0_1,

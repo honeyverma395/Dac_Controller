@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x44492C7AAF04B315",
+      "boundary_crc": "0x44492C7A6DB33DF2",
       "device": "xc7z020clg400-1",
       "gen_directory": "../../../../DAC_controller.gen/sources_1/bd/design_1",
       "name": "design_1",
@@ -15,7 +15,8 @@
       "pmod_dac_ad5541a_0": "",
       "xlconstant_0": "",
       "xlconstant_1": "",
-      "xlconcat_0": ""
+      "xlconcat_0": "",
+      "button_debounce_0": ""
     },
     "ports": {
       "ja2": {
@@ -39,6 +40,10 @@
         "type": "clk",
         "direction": "I",
         "parameters": {
+          "ASSOCIATED_RESET": {
+            "value": "sw1",
+            "value_src": "default"
+          },
           "CLK_DOMAIN": {
             "value": "design_1_clk_in1_0",
             "value_src": "default"
@@ -240,7 +245,7 @@
         "inst_hier_path": "xlconstant_1",
         "parameters": {
           "CONST_VAL": {
-            "value": "20"
+            "value": "65500"
           },
           "CONST_WIDTH": {
             "value": "16"
@@ -264,14 +269,69 @@
             "value": "1"
           }
         }
+      },
+      "button_debounce_0": {
+        "vlnv": "xilinx.com:module_ref:button_debounce:1.0",
+        "ip_revision": "1",
+        "xci_name": "design_1_button_debounce_0_0",
+        "xci_path": "ip/design_1_button_debounce_0_0/design_1_button_debounce_0_0.xci",
+        "inst_hier_path": "button_debounce_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "button_debounce",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "reset",
+                "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "125000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_in1_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "reset": {
+            "type": "rst",
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_HIGH",
+                "value_src": "user_prop"
+              }
+            }
+          },
+          "button_in": {
+            "direction": "I"
+          },
+          "button_out": {
+            "direction": "O"
+          }
+        }
       }
     },
     "nets": {
+      "button_debounce_0_button_out": {
+        "ports": [
+          "button_debounce_0/button_out",
+          "pmod_dac_ad5541a_0/dac_tx_ena"
+        ]
+      },
       "clk_in1_0_1": {
         "ports": [
           "sysclk",
           "clk_wiz_0/clk_in1",
-          "jb0"
+          "jb0",
+          "button_debounce_0/clk"
         ]
       },
       "clk_wiz_0_clk_out1": {
@@ -315,13 +375,14 @@
         "ports": [
           "sw1",
           "clk_wiz_0/reset",
-          "pmod_dac_ad5541a_0/reset"
+          "pmod_dac_ad5541a_0/reset",
+          "button_debounce_0/reset"
         ]
       },
       "sw0_1": {
         "ports": [
           "sw0",
-          "pmod_dac_ad5541a_0/dac_tx_ena"
+          "button_debounce_0/button_in"
         ]
       },
       "xlconcat_0_dout": {
