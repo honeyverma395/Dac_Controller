@@ -64,7 +64,7 @@ ENTITY design_1_pmod_dac_ad5541a_0_0 IS
     ldac_n : OUT STD_LOGIC;
     mosi : OUT STD_LOGIC;
     sclk : OUT STD_LOGIC;
-    ss_n : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+    ss_n : OUT STD_LOGIC
   );
 END design_1_pmod_dac_ad5541a_0_0;
 
@@ -86,7 +86,7 @@ ARCHITECTURE design_1_pmod_dac_ad5541a_0_0_arch OF design_1_pmod_dac_ad5541a_0_0
       ldac_n : OUT STD_LOGIC;
       mosi : OUT STD_LOGIC;
       sclk : OUT STD_LOGIC;
-      ss_n : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+      ss_n : OUT STD_LOGIC
     );
   END COMPONENT pmod_dac_ad5541a;
   ATTRIBUTE X_INTERFACE_INFO : STRING;

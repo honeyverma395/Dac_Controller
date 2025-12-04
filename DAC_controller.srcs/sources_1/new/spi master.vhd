@@ -23,7 +23,7 @@ ENTITY spi_master IS
     miso    : IN     STD_LOGIC;                             --dada rebuda del slave
 
     sclk    : BUFFER STD_LOGIC;                                --sortida del clock SPI
-    ss_n    : OUT    STD_LOGIC_VECTOR(slaves-1 DOWNTO 0);      --selecció dels slaves
+    ss_n    : OUT    STD_LOGIC;      --selecció dels slaves
     mosi    : OUT    STD_LOGIC;                             --sortida MOSI
 
     busy    : OUT    STD_LOGIC;                             --1: ocupat, 0: lliure
@@ -39,14 +39,14 @@ ARCHITECTURE logic OF spi_master IS
   SIGNAL slave_sel   : INTEGER;
   SIGNAL clk_ratio   : INTEGER;                             --valor efectiu del divisor
   SIGNAL count       : INTEGER;                             --comptador per generar SCLK
-  SIGNAL clk_toggles : INTEGER RANGE 0 TO d_width*2 + 1;    --canvis totals de SCLK
+  SIGNAL clk_toggles : INTEGER RANGE 0 TO d_width*2 + 1;        --canvis totals de SCLK
   SIGNAL assert_data : STD_LOGIC;                           --1: transmetre, 0: rebre
   SIGNAL continue_f  : STD_LOGIC;                           --flag de transmissió contínua
 
   SIGNAL rx_buffer   : STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);
   SIGNAL tx_buffer   : STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);
 
-  SIGNAL last_bit_rx : INTEGER RANGE 0 TO d_width*2;
+  SIGNAL last_bit_rx : INTEGER RANGE 0 TO d_width*2 -1;
 
 BEGIN
 
@@ -55,10 +55,17 @@ BEGIN
     -- RESET 
     IF reset = '1' THEN
       busy      <= '1';
-      ss_n      <= (OTHERS => '0');
+      ss_n      <= '1';
       mosi      <= 'Z';
       rx_data   <= (OTHERS => '0');
       state     <= ready;
+      sclk          <= cpol;
+      count         <= 1;
+      clk_ratio     <= 1;
+      clk_toggles   <=0;
+      assert_data   <= '0';
+      rx_buffer     <= (others => '0');
+      tx_buffer     <= (others =>'0');
 
     -- FUNCIONAMENT NORMAL
     ELSIF rising_edge(clock) THEN
@@ -66,7 +73,7 @@ BEGIN
         -- ESTAT READY: esperem a ENABLE
         WHEN ready =>
           busy       <= '0';                --master disponible
-          ss_n       <= (OTHERS => '0');    --cap slave seleccionat
+          ss_n       <= '1';    --cap slave seleccionat
           mosi       <= 'Z';                --MOSI en alta impedància
           continue_f <= '0';
 
@@ -91,14 +98,14 @@ BEGIN
             END IF;
 
             --configuració del clock SPI
-            sclk        <= '1';
+            sclk        <= cpol;
             assert_data <= NOT cpha;
 
             --carregar dades a transmetre
             tx_buffer   <= tx_data;
 
             clk_toggles <= 0;
-            last_bit_rx <= d_width*2 + conv_integer(cpha) - 1;
+            last_bit_rx <= d_width*2 - 1;
 
             state <= execute;
           END IF;
@@ -107,7 +114,7 @@ BEGIN
         WHEN execute =>
 
           busy <= '1';
-          ss_n(slave_sel) <= '0';           --activar slave
+          ss_n <= '0';           --activar slave
 
           -- GENERACIÓ DEL CLOCK SPI (divisor)
           IF count = clk_ratio THEN
@@ -115,19 +122,19 @@ BEGIN
             assert_data <= NOT assert_data; --canvi de fase (TX/RX)
 
             --actualitzar comptador de toggles
-            IF clk_toggles = d_width*2 + 1 THEN
+            IF clk_toggles = d_width*2+1 THEN
               clk_toggles <= 0;
             ELSE
               clk_toggles <= clk_toggles + 1;
             END IF;
 
             --toggle del SCLK
-            IF clk_toggles <= d_width*2 THEN
+            IF (clk_toggles <= d_width*2) THEN
               sclk <= NOT sclk;
             END IF;
 
             -- RECEPCIÓ (quan assert_data = 0)
-            IF assert_data = '0' AND clk_toggles < last_bit_rx + 1 THEN
+            IF (assert_data = '0' AND clk_toggles < last_bit_rx + 1) THEN
               rx_buffer <= rx_buffer(d_width-2 DOWNTO 0) & miso;
             END IF;
 
@@ -153,7 +160,7 @@ BEGIN
             -- FINAL NORMAL DE LA TRANSMISSIÓ
             IF clk_toggles = d_width*2 + 1 AND cont = '0' THEN
               busy    <= '0';
-              ss_n    <= (OTHERS => '1');
+              ss_n    <= '1';
               mosi    <= 'Z';
               rx_data <= rx_buffer;
               state   <= ready;

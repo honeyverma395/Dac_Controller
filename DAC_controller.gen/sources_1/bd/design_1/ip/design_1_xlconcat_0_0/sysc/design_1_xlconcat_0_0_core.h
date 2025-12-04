@@ -13,8 +13,8 @@
 #include <systemc.h>
 #include "properties.h"
 
-#define IN0_WIDTH 4
-#define IN0_WIDTH 4
+#define IN0_WIDTH 16
+#define IN0_WIDTH 16
 #define IN1_WIDTH 12
 #define IN2_WIDTH 1
 #define IN3_WIDTH 1
@@ -150,13 +150,11 @@ class design_1_xlconcat_0_0_core : public sc_module
        design_1_xlconcat_0_0_core (sc_core::sc_module_name nm, const xsc::common_cpp::properties& props)
             : sc_module(nm)
               , In0    ( "In0" )
-              , In1    ( "In1" )
               , dout   ( "dout" )
     {
         SC_HAS_PROCESS(design_1_xlconcat_0_0_core);
         SC_METHOD(concate_input_port_values);
-            sensitive << In0 
-                      << In1 ;
+            sensitive << In0 ;
         dont_initialize();
     }
 
@@ -166,12 +164,10 @@ class design_1_xlconcat_0_0_core : public sc_module
     {
         sc_bv <16> portConcateVal;
             portConcateVal.range(0,0) =  In0.read();
-            portConcateVal.range(1,1) =  In1.read();
         dout.write(portConcateVal);
     }
     public: 
         sc_in< sc_bv<IN0_WIDTH> >   In0;
-        sc_in< sc_bv<IN1_WIDTH> >   In1;
         sc_out< sc_bv <16> >  dout;
 
 };

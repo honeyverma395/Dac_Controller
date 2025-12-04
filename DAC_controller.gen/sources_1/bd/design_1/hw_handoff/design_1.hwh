@@ -1,15 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Dec  4 13:00:40 2025" VIVADOVERSION="2024.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Dec  4 18:16:11 2025" VIVADOVERSION="2024.1">
 
   <SYSTEMINFO ARCH="zynq" BOARD="tul.com.tw:pynq-z2:part0:1.0" DEVICE="7z020" NAME="design_1" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
-    <PORT DIR="I" LEFT="0" NAME="btn" RIGHT="3" SIGIS="undef" SIGNAME="External_Ports_btn">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="xlconcat_0" PORT="In0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" LEFT="0" NAME="ja0" RIGHT="0" SIGIS="undef" SIGNAME="pmod_dac_ad5541a_0_ss_n">
+    <PORT DIR="I" LEFT="0" NAME="btn" RIGHT="3" SIGIS="undef"/>
+    <PORT DIR="O" NAME="ja0" SIGIS="undef" SIGNAME="pmod_dac_ad5541a_0_ss_n">
       <CONNECTIONS>
         <CONNECTION INSTANCE="pmod_dac_ad5541a_0" PORT="ss_n"/>
       </CONNECTIONS>
@@ -29,6 +25,16 @@
         <CONNECTION INSTANCE="pmod_dac_ad5541a_0" PORT="sclk"/>
       </CONNECTIONS>
     </PORT>
+    <PORT DIR="O" NAME="jb0" SIGIS="undef" SIGNAME="External_Ports_sysclk">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="External_Ports" PORT="sysclk"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="jb1" SIGIS="undef" SIGNAME="clk_wiz_0_clk_out1">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out1"/>
+      </CONNECTIONS>
+    </PORT>
     <PORT DIR="O" NAME="led0" SIGIS="undef" SIGNAME="pmod_dac_ad5541a_0_busy">
       <CONNECTIONS>
         <CONNECTION INSTANCE="pmod_dac_ad5541a_0" PORT="busy"/>
@@ -36,19 +42,19 @@
     </PORT>
     <PORT DIR="I" NAME="sw0" SIGIS="undef" SIGNAME="External_Ports_sw0">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="button_debounce_0" PORT="button_in"/>
+        <CONNECTION INSTANCE="pmod_dac_ad5541a_0" PORT="dac_tx_ena"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="sw1" POLARITY="ACTIVE_HIGH" SIGIS="rst" SIGNAME="External_Ports_sw1">
       <CONNECTIONS>
         <CONNECTION INSTANCE="clk_wiz_0" PORT="reset"/>
         <CONNECTION INSTANCE="pmod_dac_ad5541a_0" PORT="reset"/>
-        <CONNECTION INSTANCE="button_debounce_0" PORT="reset"/>
       </CONNECTIONS>
     </PORT>
     <PORT CLKFREQUENCY="125000000" DIR="I" NAME="sysclk" SIGIS="clk" SIGNAME="External_Ports_sysclk">
       <CONNECTIONS>
         <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_in1"/>
+        <CONNECTION INSTANCE="External_Ports" PORT="jb0"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -56,37 +62,6 @@
   <EXTERNALINTERFACES/>
 
   <MODULES>
-    <MODULE COREREVISION="1" FULLNAME="/button_debounce_0" HWVERSION="1.0" INSTANCE="button_debounce_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="button_debounce" VLNV="xilinx.com:module_ref:button_debounce:1.0">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="COUNTER_SIZE" VALUE="10000"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_button_debounce_0_0"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT DIR="I" NAME="button_in" SIGIS="undef" SIGNAME="External_Ports_sw0">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="sw0"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="button_out" SIGIS="undef" SIGNAME="button_debounce_0_button_out">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="pmod_dac_ad5541a_0" PORT="dac_tx_ena"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out1">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="clk_wiz_0" PORT="clk_out1"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_HIGH" SIGIS="rst" SIGNAME="External_Ports_sw1">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="sw1"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
-    </MODULE>
     <MODULE COREREVISION="14" FULLNAME="/clk_wiz_0" HWVERSION="6.0" INSTANCE="clk_wiz_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="clk_wiz" VLNV="xilinx.com:ip:clk_wiz:6.0">
       <DOCUMENTS>
         <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=clk_wiz;v=v6_0;d=pg065-clk-wiz.pdf"/>
@@ -674,7 +649,7 @@
         </PORT>
         <PORT CLKFREQUENCY="100000000" DIR="O" NAME="clk_out1" SIGIS="clk" SIGNAME="clk_wiz_0_clk_out1">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="button_debounce_0" PORT="clk"/>
+            <CONNECTION INSTANCE="External_Ports" PORT="jb1"/>
             <CONNECTION INSTANCE="pmod_dac_ad5541a_0" PORT="clk"/>
           </CONNECTIONS>
         </PORT>
@@ -711,9 +686,9 @@
             <CONNECTION INSTANCE="xlconcat_0" PORT="dout"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="dac_tx_ena" SIGIS="undef" SIGNAME="button_debounce_0_button_out">
+        <PORT DIR="I" NAME="dac_tx_ena" SIGIS="undef" SIGNAME="External_Ports_sw0">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="button_debounce_0" PORT="button_out"/>
+            <CONNECTION INSTANCE="External_Ports" PORT="sw0"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="ldac_n" SIGIS="undef" SIGNAME="pmod_dac_ad5541a_0_ldac_n">
@@ -736,7 +711,7 @@
             <CONNECTION INSTANCE="External_Ports" PORT="ja3"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="0" NAME="ss_n" RIGHT="0" SIGIS="undef" SIGNAME="pmod_dac_ad5541a_0_ss_n">
+        <PORT DIR="O" NAME="ss_n" SIGIS="undef" SIGNAME="pmod_dac_ad5541a_0_ss_n">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="ja0"/>
           </CONNECTIONS>
@@ -752,7 +727,7 @@
     <MODULE COREREVISION="6" FULLNAME="/xlconcat_0" HWVERSION="2.1" INSTANCE="xlconcat_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconcat" VLNV="xilinx.com:ip:xlconcat:2.1">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="IN0_WIDTH" VALUE="4"/>
+        <PARAMETER NAME="IN0_WIDTH" VALUE="16"/>
         <PARAMETER NAME="IN100_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN101_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN102_WIDTH" VALUE="1"/>
@@ -880,18 +855,13 @@
         <PARAMETER NAME="IN98_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN99_WIDTH" VALUE="1"/>
         <PARAMETER NAME="IN9_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="NUM_PORTS" VALUE="2"/>
+        <PARAMETER NAME="NUM_PORTS" VALUE="1"/>
         <PARAMETER NAME="dout_width" VALUE="16"/>
         <PARAMETER NAME="Component_Name" VALUE="design_1_xlconcat_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
-        <PORT DIR="I" LEFT="3" NAME="In0" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_btn">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="btn"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" LEFT="11" NAME="In1" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_1_dout">
+        <PORT DIR="I" LEFT="15" NAME="In0" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_1_dout">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconstant_1" PORT="dout"/>
           </CONNECTIONS>
@@ -924,15 +894,15 @@
     <MODULE COREREVISION="9" FULLNAME="/xlconstant_1" HWVERSION="1.1" INSTANCE="xlconstant_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="CONST_VAL" VALUE="0xD05"/>
-        <PARAMETER NAME="CONST_WIDTH" VALUE="12"/>
+        <PARAMETER NAME="CONST_VAL" VALUE="0x0014"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="16"/>
         <PARAMETER NAME="Component_Name" VALUE="design_1_xlconstant_1_1"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
-        <PORT DIR="O" LEFT="11" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_1_dout">
+        <PORT DIR="O" LEFT="15" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_1_dout">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="xlconcat_0" PORT="In1"/>
+            <CONNECTION INSTANCE="xlconcat_0" PORT="In0"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

@@ -14,8 +14,8 @@ ENTITY pmod_dac_ad5541a IS
     busy            : OUT     STD_LOGIC;                      --indica si es pot iniciar una nova transacció
     ldac_n          : OUT     STD_LOGIC;                      --actualització de sortida cap al DAC
     mosi            : OUT     STD_LOGIC;                      --bus SPI: Master Out Slave In
-    sclk            : BUFFER  STD_LOGIC;                      --bus SPI: rellotge (SCLK)
-    ss_n            : BUFFER  STD_LOGIC_VECTOR(0 DOWNTO 0));  --bus SPI: selecció d'esclau (en el nostre cas nomes 1)
+    sclk            : OUT     STD_LOGIC;                      --bus SPI: rellotge (SCLK)
+    ss_n            : OUT     STD_LOGIC);                      --bus SPI: selecció d'esclau (en el nostre cas nomes 1)
 END pmod_dac_ad5541a;
 
 ARCHITECTURE behavior OF pmod_dac_ad5541a IS
@@ -25,7 +25,7 @@ ARCHITECTURE behavior OF pmod_dac_ad5541a IS
   SIGNAL spi_busy      : STD_LOGIC;                           --senyal busy del SPI
   SIGNAL spi_ena       : STD_LOGIC;                           --enable per activar el mòdul SPI
   SIGNAL spi_tx_data   : STD_LOGIC_VECTOR(15 DOWNTO 0);       --dades a enviar pel SPI
-  SIGNAL button_pressed: std_logic;
+--  SIGNAL button_pressed: std_logic;
 --------------------------------------------------------------------
   -- Component SPI Master
   COMPONENT spi_master IS
@@ -43,22 +43,22 @@ ARCHITECTURE behavior OF pmod_dac_ad5541a IS
       addr    : IN     INTEGER;                               --adreça dels slaves SPI
       tx_data : IN     STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);  --dades a transmetre
       miso    : IN     STD_LOGIC;                             --Master In Slave Out (no utilitzat)
-      sclk    : BUFFER STD_LOGIC;                             --rellotge SPI
-      ss_n    : BUFFER STD_LOGIC_VECTOR(slaves-1 DOWNTO 0);   --selecció dels slaves
+      sclk    : OUT    STD_LOGIC;                             --rellotge SPI
+      ss_n    : OUT    STD_LOGIC;                             --selecció dels slaves
       mosi    : OUT    STD_LOGIC;                             --sortida SPI cap a l'esclau
       busy    : OUT    STD_LOGIC;                             --indica ocupació / dada llesta
       rx_data : OUT    STD_LOGIC_VECTOR(d_width-1 DOWNTO 0)); --dada rebuda (no usada)
   END COMPONENT spi_master;
 
 --FlipsFlops del button
-  COMPONENT button_debounce IS
-   GENERIC(
-          COUNTER_SIZE : integer := 10_000);
-   PORT(  clk        : in  std_logic;
-          reset      : in  std_logic;
-          button_in  : in  std_logic;
-          button_out : out std_logic);  
-  END COMPONENT button_debounce;
+--  COMPONENT button_debounce IS
+--   GENERIC(
+--          COUNTER_SIZE : integer := 10_000);
+--   PORT(  clk        : in  std_logic;
+--          reset      : in  std_logic;
+--          button_in  : in  std_logic;
+--          button_out : out std_logic);  
+--  END COMPONENT button_debounce;
 --------------------------------------------------------------------
 
 BEGIN
@@ -82,14 +82,15 @@ BEGIN
              busy       => spi_busy, 
              rx_data    => open);
              
-  tx_button_controller: button_debounce
-    PORT MAP(clk           => clk, 
-             reset         => reset, 
-             button_in     => dac_tx_ena, 
-             button_out    => button_pressed);
+--  tx_button_controller: button_debounce
+--    PORT MAP(clk           => clk, 
+--             reset         => reset, 
+--             button_in     => dac_tx_ena, 
+--             button_out    => button_pressed);
 
   ldac_n <= update_output_n;  --'0' fa que el DAC actualitzi la sortida amb el valor recent enviat (Active low)
-
+--  busy <= spi_busy;
+  
   -- FSM del controlador del DAC
   PROCESS(clk, reset)
     VARIABLE count : INTEGER RANGE 0 TO clk_freq*100 := 0; --comptador
@@ -98,7 +99,7 @@ BEGIN
     IF(reset = '1') THEN                     --reset actiu
       spi_ena <= '0';                        --desactiva el SPI
       spi_tx_data <= (OTHERS => '0');        --neteja dades
-      busy <= '1';                           --mòdul no disponible
+      busy <= '1';                       --mòdul no disponible
       state <= start;                        --retorna a l'estat inicial
       spi_busy_prev <= '0';                  --inicialitza l'estat previ del busy del SPI
       count:= 0;                             --reinicia el comptador
@@ -130,7 +131,7 @@ BEGIN
         
         -- Estat d'espera: si rebem dac_tx_ena, preparem una transacció
         WHEN ready =>
-          IF(button_pressed = '1') THEN
+          IF(dac_tx_ena = '1') THEN
             spi_tx_data <= dac_data;         --captura les dades del DAC
             busy <= '1';                     --ara està ocupat
             state <= send_data;              --passem a enviar

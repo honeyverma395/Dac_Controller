@@ -2,7 +2,7 @@
 --Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
---Date        : Thu Dec  4 13:00:40 2025
+--Date        : Thu Dec  4 18:16:11 2025
 --Host        : HV-laptop running 64-bit Ubuntu 24.04.3 LTS
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
@@ -15,10 +15,12 @@ use UNISIM.VCOMPONENTS.ALL;
 entity design_1_wrapper is
   port (
     btn : in STD_LOGIC_VECTOR ( 0 to 3 );
-    ja0 : out STD_LOGIC_VECTOR ( 0 to 0 );
+    ja0 : out STD_LOGIC;
     ja1 : out STD_LOGIC;
     ja2 : out STD_LOGIC;
     ja3 : out STD_LOGIC;
+    jb0 : out STD_LOGIC;
+    jb1 : out STD_LOGIC;
     led0 : out STD_LOGIC;
     sw0 : in STD_LOGIC;
     sw1 : in STD_LOGIC;
@@ -32,22 +34,26 @@ architecture STRUCTURE of design_1_wrapper is
     ja2 : out STD_LOGIC;
     ja1 : out STD_LOGIC;
     ja3 : out STD_LOGIC;
-    ja0 : out STD_LOGIC_VECTOR ( 0 to 0 );
     btn : in STD_LOGIC_VECTOR ( 0 to 3 );
     led0 : out STD_LOGIC;
     sysclk : in STD_LOGIC;
     sw1 : in STD_LOGIC;
-    sw0 : in STD_LOGIC
+    jb0 : out STD_LOGIC;
+    jb1 : out STD_LOGIC;
+    sw0 : in STD_LOGIC;
+    ja0 : out STD_LOGIC
   );
   end component design_1;
 begin
 design_1_i: component design_1
      port map (
       btn(0 to 3) => btn(0 to 3),
-      ja0(0) => ja0(0),
+      ja0 => ja0,
       ja1 => ja1,
       ja2 => ja2,
       ja3 => ja3,
+      jb0 => jb0,
+      jb1 => jb1,
       led0 => led0,
       sw0 => sw0,
       sw1 => sw1,
