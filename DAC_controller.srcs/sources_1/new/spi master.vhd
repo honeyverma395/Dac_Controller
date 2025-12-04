@@ -23,7 +23,7 @@ ENTITY spi_master IS
     miso    : IN     STD_LOGIC;                             --dada rebuda del slave
 
     sclk    : BUFFER STD_LOGIC;                                --sortida del clock SPI
-    ss_n    : OUT STD_LOGIC_VECTOR(slaves-1 DOWNTO 0);      --selecció dels slaves
+    ss_n    : OUT    STD_LOGIC_VECTOR(slaves-1 DOWNTO 0);      --selecció dels slaves
     mosi    : OUT    STD_LOGIC;                             --sortida MOSI
 
     busy    : OUT    STD_LOGIC;                             --1: ocupat, 0: lliure
@@ -55,7 +55,7 @@ BEGIN
     -- RESET 
     IF reset = '1' THEN
       busy      <= '1';
-      ss_n      <= (OTHERS => '1');
+      ss_n      <= (OTHERS => '0');
       mosi      <= 'Z';
       rx_data   <= (OTHERS => '0');
       state     <= ready;
@@ -66,7 +66,7 @@ BEGIN
         -- ESTAT READY: esperem a ENABLE
         WHEN ready =>
           busy       <= '0';                --master disponible
-          ss_n       <= (OTHERS => '1');    --cap slave seleccionat
+          ss_n       <= (OTHERS => '0');    --cap slave seleccionat
           mosi       <= 'Z';                --MOSI en alta impedància
           continue_f <= '0';
 
@@ -91,7 +91,7 @@ BEGIN
             END IF;
 
             --configuració del clock SPI
-            sclk        <= cpol;
+            sclk        <= '1';
             assert_data <= NOT cpha;
 
             --carregar dades a transmetre

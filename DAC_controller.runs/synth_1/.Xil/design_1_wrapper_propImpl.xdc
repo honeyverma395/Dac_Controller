@@ -29,3 +29,7 @@ set_property src_info {type:XDC file:1 line:43 export:INPUT save:INPUT read:READ
 set_property -dict { PACKAGE_PIN Y16   IOSTANDARD LVCMOS33 } [get_ports { ja2 }]; #IO_L7P_T1_34 Sch=ja_p[2]
 set_property src_info {type:XDC file:1 line:44 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict { PACKAGE_PIN Y17   IOSTANDARD LVCMOS33 } [get_ports { ja3 }]; #IO_L7N_T1_34 Sch=ja_n[2]
+set_property src_info {type:XDC file:1 line:52 export:INPUT save:INPUT read:READ} [current_design]
+set_property -dict { PACKAGE_PIN W14   IOSTANDARD LVCMOS33 } [get_ports { jb0 }]; #IO_L8P_T1_34 Sch=jb_p[1]
+set_property src_info {type:XDC file:1 line:53 export:INPUT save:INPUT read:READ} [current_design]
+set_property -dict { PACKAGE_PIN Y14   IOSTANDARD LVCMOS33 } [get_ports { jb1 }]; #IO_L8N_T1_34 Sch=jb_n[1]

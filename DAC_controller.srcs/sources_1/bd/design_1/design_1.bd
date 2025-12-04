@@ -263,7 +263,7 @@
         "inst_hier_path": "xlconstant_1",
         "parameters": {
           "CONST_VAL": {
-            "value": "1234"
+            "value": "3333"
           },
           "CONST_WIDTH": {
             "value": "12"
@@ -282,12 +282,15 @@
           },
           "IN1_WIDTH": {
             "value": "12"
+          },
+          "NUM_PORTS": {
+            "value": "2"
           }
         }
       }
     },
     "nets": {
-      "btn_2": {
+      "btn_1": {
         "ports": [
           "btn",
           "xlconcat_0/In0"

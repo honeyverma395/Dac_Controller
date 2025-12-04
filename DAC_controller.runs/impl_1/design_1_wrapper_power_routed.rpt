@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date             : Thu Dec  4 12:07:15 2025
+| Date             : Thu Dec  4 13:03:38 2025
 | Host             : HV-laptop running 64-bit Ubuntu 24.04.3 LTS
 | Command          : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 | Design           : design_1_wrapper
@@ -30,11 +30,11 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.219        |
+| Total On-Chip Power (W)  | 0.217        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.112        |
-| Device Static (W)        | 0.108        |
+| Dynamic (W)              | 0.110        |
+| Device Static (W)        | 0.107        |
 | Effective TJA (C/W)      | 11.5         |
 | Max Ambient (C)          | 82.5         |
 | Junction Temperature (C) | 27.5         |
@@ -58,11 +58,11 @@ Table of Contents
 |   CARRY4       |    <0.001 |       27 |     13300 |            0.20 |
 |   Register     |    <0.001 |      127 |    106400 |            0.12 |
 |   Others       |     0.000 |       13 |       --- |             --- |
-| Signals        |    <0.001 |      190 |       --- |             --- |
+| Signals        |    <0.001 |      189 |       --- |             --- |
 | MMCM           |     0.106 |        1 |         4 |           25.00 |
-| I/O            |     0.003 |       12 |       125 |            9.60 |
-| Static Power   |     0.108 |          |           |                 |
-| Total          |     0.219 |          |           |                 |
+| I/O            |     0.001 |       12 |       125 |            9.60 |
+| Static Power   |     0.107 |          |           |                 |
+| Total          |     0.217 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Vccint    |       1.000 |     0.011 |       0.003 |      0.008 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.069 |       0.059 |      0.011 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.002 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -153,7 +153,7 @@ Table of Contents
 +------------------------+-----------+
 | Name                   | Power (W) |
 +------------------------+-----------+
-| design_1_wrapper       |     0.112 |
+| design_1_wrapper       |     0.110 |
 |   design_1_i           |     0.109 |
 |     clk_wiz_0          |     0.107 |
 |       inst             |     0.107 |

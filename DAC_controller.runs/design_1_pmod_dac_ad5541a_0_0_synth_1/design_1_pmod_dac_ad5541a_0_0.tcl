@@ -57,6 +57,7 @@ if {$::dispatch::connected} {
 
 OPTRACE "design_1_pmod_dac_ad5541a_0_0_synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 4
+set_param xicom.use_bs_reader 1
 set_param project.vivado.isBlockSynthRun true
 OPTRACE "Creating in-memory project" START { }
 set_param ips.modRefOverrideMrefDirPath /home/hverma/Projects/DAC_controller/DAC_controller.gen/sources_1/bd/mref

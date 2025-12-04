@@ -2,7 +2,7 @@
 --Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
---Date        : Thu Dec  4 12:05:36 2025
+--Date        : Thu Dec  4 13:00:40 2025
 --Host        : HV-laptop running 64-bit Ubuntu 24.04.3 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -78,7 +78,7 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 15 downto 0 )
   );
   end component design_1_xlconcat_0_0;
-  signal btn_2 : STD_LOGIC_VECTOR ( 0 to 3 );
+  signal btn_1 : STD_LOGIC_VECTOR ( 0 to 3 );
   signal button_debounce_0_button_out : STD_LOGIC;
   signal button_in_0_1 : STD_LOGIC;
   signal clk_in1_0_1 : STD_LOGIC;
@@ -100,7 +100,7 @@ architecture STRUCTURE of design_1 is
   attribute X_INTERFACE_INFO of sysclk : signal is "xilinx.com:signal:clock:1.0 CLK.SYSCLK CLK";
   attribute X_INTERFACE_PARAMETER of sysclk : signal is "XIL_INTERFACENAME CLK.SYSCLK, CLK_DOMAIN design_1_clk_in1_0, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
 begin
-  btn_2(0 to 3) <= btn(0 to 3);
+  btn_1(0 to 3) <= btn(0 to 3);
   button_in_0_1 <= sw0;
   clk_in1_0_1 <= sysclk;
   ja0(0) <= pmod_dac_ad5541a_0_ss_n(0);
@@ -138,10 +138,10 @@ pmod_dac_ad5541a_0: component design_1_pmod_dac_ad5541a_0_0
     );
 xlconcat_0: component design_1_xlconcat_0_0
      port map (
-      In0(3) => btn_2(0),
-      In0(2) => btn_2(1),
-      In0(1) => btn_2(2),
-      In0(0) => btn_2(3),
+      In0(3) => btn_1(0),
+      In0(2) => btn_1(1),
+      In0(1) => btn_1(2),
+      In0(0) => btn_1(3),
       In1(11 downto 0) => xlconstant_1_dout(11 downto 0),
       dout(15 downto 0) => xlconcat_0_dout(15 downto 0)
     );

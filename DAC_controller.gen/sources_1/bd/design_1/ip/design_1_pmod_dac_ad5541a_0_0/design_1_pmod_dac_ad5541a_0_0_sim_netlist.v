@@ -2,7 +2,7 @@
 // Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-// Date        : Thu Dec  4 12:06:06 2025
+// Date        : Thu Dec  4 13:02:30 2025
 // Host        : HV-laptop running 64-bit Ubuntu 24.04.3 LTS
 // Command     : write_verilog -force -mode funcsim
 //               /home/hverma/Projects/DAC_controller/DAC_controller.gen/sources_1/bd/design_1/ip/design_1_pmod_dac_ad5541a_0_0/design_1_pmod_dac_ad5541a_0_0_sim_netlist.v
@@ -1097,7 +1097,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   wire assert_data_i_1_n_0;
   wire assert_data_reg_n_0;
   wire busy1;
-  wire busy118_out;
+  wire busy120_out;
   wire busy1_carry__0_i_1_n_0;
   wire busy1_carry__0_i_2_n_0;
   wire busy1_carry__0_i_3_n_0;
@@ -1397,7 +1397,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     busy_i_1
        (.I0(busy1),
         .I1(\count_reg[1]_0 ),
-        .I2(busy118_out),
+        .I2(busy120_out),
         .I3(state_reg_n_0),
         .O(busy_i_1_n_0));
   FDPE busy_reg
@@ -1447,7 +1447,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
         .I1(\clk_toggles_reg_n_0_[1] ),
         .I2(\clk_toggles_reg_n_0_[0] ),
         .O(clk_toggles[2]));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT4 #(
     .INIT(16'h7F80)) 
     \clk_toggles[3]_i_1 
@@ -1907,21 +1907,21 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
         .O(mosi));
   (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT5 #(
-    .INIT(32'h0CCC0800)) 
+    .INIT(32'h22AA2000)) 
     mosi_INST_0_i_2
-       (.I0(mosi0__0),
-        .I1(state_reg_n_0),
-        .I2(busy118_out),
+       (.I0(state_reg_n_0),
+        .I1(busy120_out),
+        .I2(mosi0__0),
         .I3(busy1),
         .I4(mosi_0),
         .O(state_reg_0));
   LUT6 #(
-    .INIT(64'hAABAFAFAAA8A0A0A)) 
+    .INIT(64'hAAAEEEEEAAA22222)) 
     mosi_tristate_oe_i_1
        (.I0(\tx_buffer_reg_n_0_[15] ),
-        .I1(mosi0__0),
-        .I2(state_reg_n_0),
-        .I3(busy118_out),
+        .I1(state_reg_n_0),
+        .I2(busy120_out),
+        .I3(mosi0__0),
         .I4(busy1),
         .I5(mosi_tristate_oe_reg_n_0),
         .O(mosi_tristate_oe_i_1_n_0));
@@ -1932,24 +1932,23 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
         .Q(mosi_tristate_oe_reg_n_0),
         .R(1'b0));
   LUT6 #(
-    .INIT(64'h00333033AA888A88)) 
+    .INIT(64'hEEEBBBBBEEEEEEEE)) 
     sclk_i_1
-       (.I0(state_reg_n_0),
-        .I1(\clk_toggles[5]_i_1_n_0 ),
-        .I2(\clk_toggles_reg_n_0_[5] ),
-        .I3(clk_toggles0),
-        .I4(sclk_i_2_n_0),
-        .I5(sclk),
+       (.I0(\clk_toggles[5]_i_1_n_0 ),
+        .I1(sclk),
+        .I2(sclk_i_2_n_0),
+        .I3(\clk_toggles_reg_n_0_[0] ),
+        .I4(\clk_toggles_reg_n_0_[5] ),
+        .I5(clk_toggles0),
         .O(sclk_i_1_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT5 #(
-    .INIT(32'h00000001)) 
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT4 #(
+    .INIT(16'hFFFE)) 
     sclk_i_2
-       (.I0(\clk_toggles_reg_n_0_[4] ),
-        .I1(\clk_toggles_reg_n_0_[1] ),
-        .I2(\clk_toggles_reg_n_0_[3] ),
-        .I3(\clk_toggles_reg_n_0_[2] ),
-        .I4(\clk_toggles_reg_n_0_[0] ),
+       (.I0(\clk_toggles_reg_n_0_[2] ),
+        .I1(\clk_toggles_reg_n_0_[3] ),
+        .I2(\clk_toggles_reg_n_0_[1] ),
+        .I3(\clk_toggles_reg_n_0_[4] ),
         .O(sclk_i_2_n_0));
   FDRE sclk_reg
        (.C(clk),
@@ -1969,11 +1968,11 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
         .O(busy_reg_0));
   (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT3 #(
-    .INIT(8'h8F)) 
+    .INIT(8'h80)) 
     \ss_n[0]_i_1 
-       (.I0(busy1),
-        .I1(busy118_out),
-        .I2(state_reg_n_0),
+       (.I0(state_reg_n_0),
+        .I1(busy1),
+        .I2(busy120_out),
         .O(\ss_n[0]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'h0000000000000008)) 
@@ -1984,17 +1983,17 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
         .I3(\clk_toggles_reg_n_0_[1] ),
         .I4(\clk_toggles_reg_n_0_[3] ),
         .I5(\clk_toggles_reg_n_0_[2] ),
-        .O(busy118_out));
-  FDPE \ss_n_reg[0] 
+        .O(busy120_out));
+  FDCE \ss_n_reg[0] 
        (.C(clk),
         .CE(1'b1),
+        .CLR(reset),
         .D(\ss_n[0]_i_1_n_0 ),
-        .PRE(reset),
         .Q(ss_n));
   LUT4 #(
     .INIT(16'h7F70)) 
     state_i_1
-       (.I0(busy118_out),
+       (.I0(busy120_out),
         .I1(busy1),
         .I2(state_reg_n_0),
         .I3(\count_reg[1]_0 ),
