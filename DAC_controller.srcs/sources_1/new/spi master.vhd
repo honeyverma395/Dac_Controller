@@ -22,8 +22,8 @@ ENTITY spi_master IS
     tx_data : IN     STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);  --info a transmetre
     miso    : IN     STD_LOGIC;                             --dada rebuda del slave
 
-    sclk    : BUFFER STD_LOGIC;                             --sortida del clock SPI
-    ss_n    : BUFFER STD_LOGIC_VECTOR(slaves-1 DOWNTO 0);   --selecció dels slaves
+    sclk    : BUFFER STD_LOGIC;                                --sortida del clock SPI
+    ss_n    : OUT STD_LOGIC_VECTOR(slaves-1 DOWNTO 0);      --selecció dels slaves
     mosi    : OUT    STD_LOGIC;                             --sortida MOSI
 
     busy    : OUT    STD_LOGIC;                             --1: ocupat, 0: lliure

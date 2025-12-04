@@ -1,13 +1,14 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x4A0A91A85D5165C2",
+      "boundary_crc": "0x4A0A91A8FB46E4D1",
       "device": "xc7z020clg400-1",
       "gen_directory": "../../../../DAC_controller.gen/sources_1/bd/design_1",
       "name": "design_1",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2024.1"
+      "tool_version": "2024.1",
+      "validated": "true"
     },
     "design_tree": {
       "clk_wiz_0": "",
@@ -44,16 +45,41 @@
         "type": "clk",
         "direction": "I",
         "parameters": {
+          "CLK_DOMAIN": {
+            "value": "design_1_clk_in1_0",
+            "value_src": "default"
+          },
           "FREQ_HZ": {
             "value": "125000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
+          }
+        }
+      },
+      "sw1": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_HIGH"
           }
         }
       },
       "sw0": {
-        "type": "intr",
-        "direction": "I"
-      },
-      "sw1": {
         "direction": "I"
       }
     },
@@ -99,11 +125,35 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "reset",
+                "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "ip_prop"
+              },
+              "PHASE": {
+                "value": "0.0",
+                "value_src": "ip_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "/clk_wiz_0_clk_out1",
+                "value_src": "ip_prop"
+              }
+            }
           },
-          "reset_n": {
+          "reset": {
             "type": "rst",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_HIGH",
+                "value_src": "user_prop"
+              }
+            }
           },
           "dac_tx_ena": {
             "direction": "I"
@@ -111,7 +161,13 @@
           "dac_data": {
             "direction": "I",
             "left": "15",
-            "right": "0"
+            "right": "0",
+            "parameters": {
+              "PortWidth": {
+                "value": "16",
+                "value_src": "ip_prop"
+              }
+            }
           },
           "update_output_n": {
             "direction": "I"
@@ -154,12 +210,30 @@
               "ASSOCIATED_RESET": {
                 "value": "reset",
                 "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "ip_prop"
+              },
+              "PHASE": {
+                "value": "0.0",
+                "value_src": "ip_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "/clk_wiz_0_clk_out1",
+                "value_src": "ip_prop"
               }
             }
           },
           "reset": {
             "type": "rst",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_HIGH",
+                "value_src": "user_prop"
+              }
+            }
           },
           "button_in": {
             "direction": "I"
@@ -225,11 +299,23 @@
           "pmod_dac_ad5541a_0/dac_tx_ena"
         ]
       },
+      "button_in_0_1": {
+        "ports": [
+          "sw0",
+          "button_debounce_0/button_in"
+        ]
+      },
+      "clk_in1_0_1": {
+        "ports": [
+          "sysclk",
+          "clk_wiz_0/clk_in1"
+        ]
+      },
       "clk_wiz_0_clk_out1": {
         "ports": [
           "clk_wiz_0/clk_out1",
-          "pmod_dac_ad5541a_0/clk",
-          "button_debounce_0/clk"
+          "button_debounce_0/clk",
+          "pmod_dac_ad5541a_0/clk"
         ]
       },
       "pmod_dac_ad5541a_0_busy": {
@@ -266,20 +352,8 @@
         "ports": [
           "sw1",
           "clk_wiz_0/reset",
-          "button_debounce_0/reset",
-          "pmod_dac_ad5541a_0/reset_n"
-        ]
-      },
-      "sw0_1": {
-        "ports": [
-          "sw0",
-          "button_debounce_0/button_in"
-        ]
-      },
-      "sysclk_1": {
-        "ports": [
-          "sysclk",
-          "clk_wiz_0/clk_in1"
+          "pmod_dac_ad5541a_0/reset",
+          "button_debounce_0/reset"
         ]
       },
       "xlconcat_0_dout": {
