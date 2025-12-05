@@ -55,14 +55,16 @@
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_xlconcat_0_0 (
   In0,
+  In1,
   dout
 );
 
-input wire [15 : 0] In0;
+input wire [3 : 0] In0;
+input wire [11 : 0] In1;
 output wire [15 : 0] dout;
 
   xlconcat_v2_1_6_xlconcat #(
-    .IN0_WIDTH(16),
+    .IN0_WIDTH(4),
     .IN1_WIDTH(12),
     .IN2_WIDTH(1),
     .IN3_WIDTH(1),
@@ -191,10 +193,10 @@ output wire [15 : 0] dout;
     .IN126_WIDTH(1),
     .IN127_WIDTH(1),
     .dout_width(16),
-    .NUM_PORTS(1)
+    .NUM_PORTS(2)
   ) inst (
     .In0(In0),
-    .In1(12'B0),
+    .In1(In1),
     .In2(1'B0),
     .In3(1'B0),
     .In4(1'B0),

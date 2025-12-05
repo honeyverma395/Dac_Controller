@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x44492C7A6DB33DF2",
+      "boundary_crc": "0x4BABB6FC82FF51D0",
       "device": "xc7z020clg400-1",
       "gen_directory": "../../../../DAC_controller.gen/sources_1/bd/design_1",
       "name": "design_1",
@@ -12,11 +12,10 @@
     },
     "design_tree": {
       "clk_wiz_0": "",
-      "pmod_dac_ad5541a_0": "",
+      "pmod_dac_ad5541a": "",
       "xlconstant_0": "",
       "xlconstant_1": "",
-      "xlconcat_0": "",
-      "button_debounce_0": ""
+      "xlconcat_0": ""
     },
     "ports": {
       "ja2": {
@@ -78,45 +77,13 @@
           }
         }
       },
-      "jb0": {
-        "direction": "O",
-        "parameters": {
-          "CLK_DOMAIN": {
-            "value": "design_1_clk_in1_0",
-            "value_src": "default_prop"
-          },
-          "FREQ_HZ": {
-            "value": "125000000",
-            "value_src": "user_prop"
-          },
-          "PHASE": {
-            "value": "0.0",
-            "value_src": "default_prop"
-          }
-        }
-      },
-      "jb1": {
-        "direction": "O",
-        "parameters": {
-          "CLK_DOMAIN": {
-            "value": "/clk_wiz_0_clk_out1",
-            "value_src": "ip_prop"
-          },
-          "FREQ_HZ": {
-            "value": "100000000",
-            "value_src": "ip_prop"
-          },
-          "PHASE": {
-            "value": "0.0",
-            "value_src": "ip_prop"
-          }
-        }
-      },
       "sw0": {
         "direction": "I"
       },
-      "ja0": {
-        "direction": "O"
+      "ja": {
+        "direction": "O",
+        "left": "0",
+        "right": "0"
       }
     },
     "components": {
@@ -147,12 +114,12 @@
           }
         }
       },
-      "pmod_dac_ad5541a_0": {
+      "pmod_dac_ad5541a": {
         "vlnv": "xilinx.com:module_ref:pmod_dac_ad5541a:1.0",
         "ip_revision": "1",
         "xci_name": "design_1_pmod_dac_ad5541a_0_0",
         "xci_path": "ip/design_1_pmod_dac_ad5541a_0_0/design_1_pmod_dac_ad5541a_0_0.xci",
-        "inst_hier_path": "pmod_dac_ad5541a_0",
+        "inst_hier_path": "pmod_dac_ad5541a",
         "reference_info": {
           "ref_type": "hdl",
           "ref_name": "pmod_dac_ad5541a",
@@ -221,7 +188,9 @@
             "direction": "O"
           },
           "ss_n": {
-            "direction": "O"
+            "direction": "O",
+            "left": "0",
+            "right": "0"
           }
         }
       },
@@ -245,10 +214,10 @@
         "inst_hier_path": "xlconstant_1",
         "parameters": {
           "CONST_VAL": {
-            "value": "65500"
+            "value": "3333"
           },
           "CONST_WIDTH": {
-            "value": "16"
+            "value": "12"
           }
         }
       },
@@ -260,147 +229,95 @@
         "inst_hier_path": "xlconcat_0",
         "parameters": {
           "IN0_WIDTH": {
-            "value": "16"
+            "value": "4"
           },
           "IN1_WIDTH": {
             "value": "12"
           },
           "NUM_PORTS": {
-            "value": "1"
-          }
-        }
-      },
-      "button_debounce_0": {
-        "vlnv": "xilinx.com:module_ref:button_debounce:1.0",
-        "ip_revision": "1",
-        "xci_name": "design_1_button_debounce_0_0",
-        "xci_path": "ip/design_1_button_debounce_0_0/design_1_button_debounce_0_0.xci",
-        "inst_hier_path": "button_debounce_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "button_debounce",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "reset",
-                "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "125000000",
-                "value_src": "user_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "design_1_clk_in1_0",
-                "value_src": "default_prop"
-              }
-            }
-          },
-          "reset": {
-            "type": "rst",
-            "direction": "I",
-            "parameters": {
-              "POLARITY": {
-                "value": "ACTIVE_HIGH",
-                "value_src": "user_prop"
-              }
-            }
-          },
-          "button_in": {
-            "direction": "I"
-          },
-          "button_out": {
-            "direction": "O"
+            "value": "2"
           }
         }
       }
     },
     "nets": {
-      "button_debounce_0_button_out": {
+      "btn_1": {
         "ports": [
-          "button_debounce_0/button_out",
-          "pmod_dac_ad5541a_0/dac_tx_ena"
-        ]
-      },
-      "clk_in1_0_1": {
-        "ports": [
-          "sysclk",
-          "clk_wiz_0/clk_in1",
-          "jb0",
-          "button_debounce_0/clk"
+          "btn",
+          "xlconcat_0/In0"
         ]
       },
       "clk_wiz_0_clk_out1": {
         "ports": [
           "clk_wiz_0/clk_out1",
-          "jb1",
-          "pmod_dac_ad5541a_0/clk"
+          "pmod_dac_ad5541a/clk"
         ]
       },
       "pmod_dac_ad5541a_0_busy": {
         "ports": [
-          "pmod_dac_ad5541a_0/busy",
+          "pmod_dac_ad5541a/busy",
           "led0"
         ]
       },
       "pmod_dac_ad5541a_0_ldac_n": {
         "ports": [
-          "pmod_dac_ad5541a_0/ldac_n",
+          "pmod_dac_ad5541a/ldac_n",
           "ja2"
         ]
       },
       "pmod_dac_ad5541a_0_mosi": {
         "ports": [
-          "pmod_dac_ad5541a_0/mosi",
+          "pmod_dac_ad5541a/mosi",
           "ja1"
         ]
       },
       "pmod_dac_ad5541a_0_sclk": {
         "ports": [
-          "pmod_dac_ad5541a_0/sclk",
+          "pmod_dac_ad5541a/sclk",
           "ja3"
         ]
       },
-      "pmod_dac_ad5541a_0_ss_n": {
+      "pmod_dac_ad5541a_ss_n": {
         "ports": [
-          "pmod_dac_ad5541a_0/ss_n",
-          "ja0"
+          "pmod_dac_ad5541a/ss_n",
+          "ja"
         ]
       },
       "reset_0_1": {
         "ports": [
           "sw1",
           "clk_wiz_0/reset",
-          "pmod_dac_ad5541a_0/reset",
-          "button_debounce_0/reset"
+          "pmod_dac_ad5541a/reset"
         ]
       },
       "sw0_1": {
         "ports": [
           "sw0",
-          "button_debounce_0/button_in"
+          "pmod_dac_ad5541a/dac_tx_ena"
+        ]
+      },
+      "sysclk_1": {
+        "ports": [
+          "sysclk",
+          "clk_wiz_0/clk_in1"
         ]
       },
       "xlconcat_0_dout": {
         "ports": [
           "xlconcat_0/dout",
-          "pmod_dac_ad5541a_0/dac_data"
+          "pmod_dac_ad5541a/dac_data"
         ]
       },
       "xlconstant_0_dout": {
         "ports": [
           "xlconstant_0/dout",
-          "pmod_dac_ad5541a_0/update_output_n"
+          "pmod_dac_ad5541a/update_output_n"
         ]
       },
       "xlconstant_1_dout": {
         "ports": [
           "xlconstant_1/dout",
-          "xlconcat_0/In0"
+          "xlconcat_0/In1"
         ]
       }
     }

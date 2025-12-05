@@ -2,7 +2,7 @@
 // Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-// Date        : Thu Dec  4 18:49:26 2025
+// Date        : Fri Dec  5 12:35:31 2025
 // Host        : HV-laptop running 64-bit Ubuntu 24.04.3 LTS
 // Command     : write_verilog -force -mode funcsim
 //               /home/hverma/Projects/DAC_controller/DAC_controller.gen/sources_1/bd/design_1/ip/design_1_pmod_dac_ad5541a_0_0/design_1_pmod_dac_ad5541a_0_0_sim_netlist.v
@@ -36,7 +36,7 @@ module design_1_pmod_dac_ad5541a_0_0
   output ldac_n;
   output mosi;
   output sclk;
-  output ss_n;
+  output [0:0]ss_n;
 
   wire U0_n_3;
   wire busy;
@@ -47,7 +47,7 @@ module design_1_pmod_dac_ad5541a_0_0
   wire mosi_INST_0_i_1_n_0;
   wire reset;
   wire sclk;
-  wire ss_n;
+  wire [0:0]ss_n;
   wire update_output_n;
 
   assign ldac_n = update_output_n;
@@ -74,16 +74,392 @@ endmodule
 
 (* ORIG_REF_NAME = "button_debounce" *) 
 module design_1_pmod_dac_ad5541a_0_0_button_debounce
-   (clk,
+   (flipflop_4_reg_0,
+    flipflop_4_reg_1,
+    E,
     reset,
-    button_in,
-    button_out);
-  input clk;
+    dac_tx_ena,
+    clk,
+    state__0,
+    busy_reg,
+    count,
+    busy,
+    \FSM_sequential_state_reg[0] );
+  output flipflop_4_reg_0;
+  output flipflop_4_reg_1;
+  output [0:0]E;
   input reset;
-  input button_in;
-  output button_out;
+  input dac_tx_ena;
+  input clk;
+  input [0:0]state__0;
+  input busy_reg;
+  input count;
+  input busy;
+  input \FSM_sequential_state_reg[0] ;
 
+  wire [0:0]E;
+  wire \FSM_sequential_state_reg[0] ;
+  wire busy;
+  wire busy_reg;
+  wire clk;
+  wire count;
+  wire count0_carry__0_i_1_n_0;
+  wire count0_carry__0_i_2_n_0;
+  wire count0_carry__0_n_3;
+  wire count0_carry_i_1_n_0;
+  wire count0_carry_i_2_n_0;
+  wire count0_carry_i_3_n_0;
+  wire count0_carry_i_4_n_0;
+  wire count0_carry_i_5_n_0;
+  wire count0_carry_i_6_n_0;
+  wire count0_carry_i_7_n_0;
+  wire count0_carry_n_0;
+  wire count0_carry_n_1;
+  wire count0_carry_n_2;
+  wire count0_carry_n_3;
+  wire dac_tx_ena;
+  wire flipflop_1;
+  wire flipflop_2;
+  wire flipflop_3;
+  wire flipflop_3_i_1_n_0;
+  wire flipflop_4;
+  wire flipflop_4_reg_0;
+  wire flipflop_4_reg_1;
+  wire \pause_counter.count[0]_i_1_n_0 ;
+  wire \pause_counter.count[0]_i_3_n_0 ;
+  wire [13:4]\pause_counter.count_reg ;
+  wire \pause_counter.count_reg[0]_i_2_n_0 ;
+  wire \pause_counter.count_reg[0]_i_2_n_1 ;
+  wire \pause_counter.count_reg[0]_i_2_n_2 ;
+  wire \pause_counter.count_reg[0]_i_2_n_3 ;
+  wire \pause_counter.count_reg[0]_i_2_n_4 ;
+  wire \pause_counter.count_reg[0]_i_2_n_5 ;
+  wire \pause_counter.count_reg[0]_i_2_n_6 ;
+  wire \pause_counter.count_reg[0]_i_2_n_7 ;
+  wire \pause_counter.count_reg[12]_i_1_n_3 ;
+  wire \pause_counter.count_reg[12]_i_1_n_6 ;
+  wire \pause_counter.count_reg[12]_i_1_n_7 ;
+  wire \pause_counter.count_reg[4]_i_1_n_0 ;
+  wire \pause_counter.count_reg[4]_i_1_n_1 ;
+  wire \pause_counter.count_reg[4]_i_1_n_2 ;
+  wire \pause_counter.count_reg[4]_i_1_n_3 ;
+  wire \pause_counter.count_reg[4]_i_1_n_4 ;
+  wire \pause_counter.count_reg[4]_i_1_n_5 ;
+  wire \pause_counter.count_reg[4]_i_1_n_6 ;
+  wire \pause_counter.count_reg[4]_i_1_n_7 ;
+  wire \pause_counter.count_reg[8]_i_1_n_0 ;
+  wire \pause_counter.count_reg[8]_i_1_n_1 ;
+  wire \pause_counter.count_reg[8]_i_1_n_2 ;
+  wire \pause_counter.count_reg[8]_i_1_n_3 ;
+  wire \pause_counter.count_reg[8]_i_1_n_4 ;
+  wire \pause_counter.count_reg[8]_i_1_n_5 ;
+  wire \pause_counter.count_reg[8]_i_1_n_6 ;
+  wire \pause_counter.count_reg[8]_i_1_n_7 ;
+  wire \pause_counter.count_reg_n_0_[0] ;
+  wire \pause_counter.count_reg_n_0_[1] ;
+  wire \pause_counter.count_reg_n_0_[2] ;
+  wire \pause_counter.count_reg_n_0_[3] ;
+  wire reset;
+  wire [0:0]state__0;
+  wire [3:0]NLW_count0_carry_O_UNCONNECTED;
+  wire [3:1]NLW_count0_carry__0_CO_UNCONNECTED;
+  wire [3:0]NLW_count0_carry__0_O_UNCONNECTED;
+  wire [3:1]\NLW_pause_counter.count_reg[12]_i_1_CO_UNCONNECTED ;
+  wire [3:2]\NLW_pause_counter.count_reg[12]_i_1_O_UNCONNECTED ;
 
+  LUT6 #(
+    .INIT(64'hFFF4F0F40FF400F4)) 
+    \FSM_sequential_state[0]_i_1 
+       (.I0(flipflop_4),
+        .I1(flipflop_3),
+        .I2(state__0),
+        .I3(count),
+        .I4(\FSM_sequential_state_reg[0] ),
+        .I5(busy_reg),
+        .O(flipflop_4_reg_1));
+  LUT6 #(
+    .INIT(64'hFF0FFFFF0F0F0404)) 
+    busy_i_1__0
+       (.I0(flipflop_4),
+        .I1(flipflop_3),
+        .I2(state__0),
+        .I3(busy_reg),
+        .I4(count),
+        .I5(busy),
+        .O(flipflop_4_reg_0));
+  (* COMPARATOR_THRESHOLD = "11" *) 
+  CARRY4 count0_carry
+       (.CI(1'b0),
+        .CO({count0_carry_n_0,count0_carry_n_1,count0_carry_n_2,count0_carry_n_3}),
+        .CYINIT(1'b0),
+        .DI({count0_carry_i_1_n_0,count0_carry_i_2_n_0,1'b0,count0_carry_i_3_n_0}),
+        .O(NLW_count0_carry_O_UNCONNECTED[3:0]),
+        .S({count0_carry_i_4_n_0,count0_carry_i_5_n_0,count0_carry_i_6_n_0,count0_carry_i_7_n_0}));
+  (* COMPARATOR_THRESHOLD = "11" *) 
+  CARRY4 count0_carry__0
+       (.CI(count0_carry_n_0),
+        .CO({NLW_count0_carry__0_CO_UNCONNECTED[3:1],count0_carry__0_n_3}),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,count0_carry__0_i_1_n_0}),
+        .O(NLW_count0_carry__0_O_UNCONNECTED[3:0]),
+        .S({1'b0,1'b0,1'b0,count0_carry__0_i_2_n_0}));
+  LUT1 #(
+    .INIT(2'h1)) 
+    count0_carry__0_i_1
+       (.I0(\pause_counter.count_reg [13]),
+        .O(count0_carry__0_i_1_n_0));
+  LUT2 #(
+    .INIT(4'h2)) 
+    count0_carry__0_i_2
+       (.I0(\pause_counter.count_reg [13]),
+        .I1(\pause_counter.count_reg [12]),
+        .O(count0_carry__0_i_2_n_0));
+  LUT2 #(
+    .INIT(4'h1)) 
+    count0_carry_i_1
+       (.I0(\pause_counter.count_reg [10]),
+        .I1(\pause_counter.count_reg [11]),
+        .O(count0_carry_i_1_n_0));
+  LUT2 #(
+    .INIT(4'h7)) 
+    count0_carry_i_2
+       (.I0(\pause_counter.count_reg [8]),
+        .I1(\pause_counter.count_reg [9]),
+        .O(count0_carry_i_2_n_0));
+  LUT2 #(
+    .INIT(4'h1)) 
+    count0_carry_i_3
+       (.I0(\pause_counter.count_reg [4]),
+        .I1(\pause_counter.count_reg [5]),
+        .O(count0_carry_i_3_n_0));
+  LUT2 #(
+    .INIT(4'h2)) 
+    count0_carry_i_4
+       (.I0(\pause_counter.count_reg [10]),
+        .I1(\pause_counter.count_reg [11]),
+        .O(count0_carry_i_4_n_0));
+  LUT2 #(
+    .INIT(4'h8)) 
+    count0_carry_i_5
+       (.I0(\pause_counter.count_reg [8]),
+        .I1(\pause_counter.count_reg [9]),
+        .O(count0_carry_i_5_n_0));
+  LUT2 #(
+    .INIT(4'h1)) 
+    count0_carry_i_6
+       (.I0(\pause_counter.count_reg [6]),
+        .I1(\pause_counter.count_reg [7]),
+        .O(count0_carry_i_6_n_0));
+  LUT2 #(
+    .INIT(4'h2)) 
+    count0_carry_i_7
+       (.I0(\pause_counter.count_reg [4]),
+        .I1(\pause_counter.count_reg [5]),
+        .O(count0_carry_i_7_n_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    flipflop_1_reg
+       (.C(clk),
+        .CE(1'b1),
+        .D(dac_tx_ena),
+        .Q(flipflop_1),
+        .R(reset));
+  FDRE #(
+    .INIT(1'b0)) 
+    flipflop_2_reg
+       (.C(clk),
+        .CE(1'b1),
+        .D(flipflop_1),
+        .Q(flipflop_2),
+        .R(reset));
+  LUT4 #(
+    .INIT(16'hFE08)) 
+    flipflop_3_i_1
+       (.I0(flipflop_1),
+        .I1(flipflop_2),
+        .I2(count0_carry__0_n_3),
+        .I3(flipflop_3),
+        .O(flipflop_3_i_1_n_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    flipflop_3_reg
+       (.C(clk),
+        .CE(1'b1),
+        .D(flipflop_3_i_1_n_0),
+        .Q(flipflop_3),
+        .R(reset));
+  FDRE #(
+    .INIT(1'b0)) 
+    flipflop_4_reg
+       (.C(clk),
+        .CE(1'b1),
+        .D(flipflop_3),
+        .Q(flipflop_4),
+        .R(reset));
+  LUT3 #(
+    .INIT(8'hBE)) 
+    \pause_counter.count[0]_i_1 
+       (.I0(reset),
+        .I1(flipflop_1),
+        .I2(flipflop_2),
+        .O(\pause_counter.count[0]_i_1_n_0 ));
+  LUT1 #(
+    .INIT(2'h1)) 
+    \pause_counter.count[0]_i_3 
+       (.I0(\pause_counter.count_reg_n_0_[0] ),
+        .O(\pause_counter.count[0]_i_3_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[0] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[0]_i_2_n_7 ),
+        .Q(\pause_counter.count_reg_n_0_[0] ),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  (* ADDER_THRESHOLD = "11" *) 
+  CARRY4 \pause_counter.count_reg[0]_i_2 
+       (.CI(1'b0),
+        .CO({\pause_counter.count_reg[0]_i_2_n_0 ,\pause_counter.count_reg[0]_i_2_n_1 ,\pause_counter.count_reg[0]_i_2_n_2 ,\pause_counter.count_reg[0]_i_2_n_3 }),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b1}),
+        .O({\pause_counter.count_reg[0]_i_2_n_4 ,\pause_counter.count_reg[0]_i_2_n_5 ,\pause_counter.count_reg[0]_i_2_n_6 ,\pause_counter.count_reg[0]_i_2_n_7 }),
+        .S({\pause_counter.count_reg_n_0_[3] ,\pause_counter.count_reg_n_0_[2] ,\pause_counter.count_reg_n_0_[1] ,\pause_counter.count[0]_i_3_n_0 }));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[10] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[8]_i_1_n_5 ),
+        .Q(\pause_counter.count_reg [10]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[11] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[8]_i_1_n_4 ),
+        .Q(\pause_counter.count_reg [11]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[12] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[12]_i_1_n_7 ),
+        .Q(\pause_counter.count_reg [12]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  (* ADDER_THRESHOLD = "11" *) 
+  CARRY4 \pause_counter.count_reg[12]_i_1 
+       (.CI(\pause_counter.count_reg[8]_i_1_n_0 ),
+        .CO({\NLW_pause_counter.count_reg[12]_i_1_CO_UNCONNECTED [3:1],\pause_counter.count_reg[12]_i_1_n_3 }),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O({\NLW_pause_counter.count_reg[12]_i_1_O_UNCONNECTED [3:2],\pause_counter.count_reg[12]_i_1_n_6 ,\pause_counter.count_reg[12]_i_1_n_7 }),
+        .S({1'b0,1'b0,\pause_counter.count_reg [13:12]}));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[13] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[12]_i_1_n_6 ),
+        .Q(\pause_counter.count_reg [13]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[1] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[0]_i_2_n_6 ),
+        .Q(\pause_counter.count_reg_n_0_[1] ),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[2] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[0]_i_2_n_5 ),
+        .Q(\pause_counter.count_reg_n_0_[2] ),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[3] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[0]_i_2_n_4 ),
+        .Q(\pause_counter.count_reg_n_0_[3] ),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[4] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[4]_i_1_n_7 ),
+        .Q(\pause_counter.count_reg [4]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  (* ADDER_THRESHOLD = "11" *) 
+  CARRY4 \pause_counter.count_reg[4]_i_1 
+       (.CI(\pause_counter.count_reg[0]_i_2_n_0 ),
+        .CO({\pause_counter.count_reg[4]_i_1_n_0 ,\pause_counter.count_reg[4]_i_1_n_1 ,\pause_counter.count_reg[4]_i_1_n_2 ,\pause_counter.count_reg[4]_i_1_n_3 }),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O({\pause_counter.count_reg[4]_i_1_n_4 ,\pause_counter.count_reg[4]_i_1_n_5 ,\pause_counter.count_reg[4]_i_1_n_6 ,\pause_counter.count_reg[4]_i_1_n_7 }),
+        .S(\pause_counter.count_reg [7:4]));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[5] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[4]_i_1_n_6 ),
+        .Q(\pause_counter.count_reg [5]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[6] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[4]_i_1_n_5 ),
+        .Q(\pause_counter.count_reg [6]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[7] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[4]_i_1_n_4 ),
+        .Q(\pause_counter.count_reg [7]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[8] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[8]_i_1_n_7 ),
+        .Q(\pause_counter.count_reg [8]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  (* ADDER_THRESHOLD = "11" *) 
+  CARRY4 \pause_counter.count_reg[8]_i_1 
+       (.CI(\pause_counter.count_reg[4]_i_1_n_0 ),
+        .CO({\pause_counter.count_reg[8]_i_1_n_0 ,\pause_counter.count_reg[8]_i_1_n_1 ,\pause_counter.count_reg[8]_i_1_n_2 ,\pause_counter.count_reg[8]_i_1_n_3 }),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O({\pause_counter.count_reg[8]_i_1_n_4 ,\pause_counter.count_reg[8]_i_1_n_5 ,\pause_counter.count_reg[8]_i_1_n_6 ,\pause_counter.count_reg[8]_i_1_n_7 }),
+        .S(\pause_counter.count_reg [11:8]));
+  FDRE #(
+    .INIT(1'b0)) 
+    \pause_counter.count_reg[9] 
+       (.C(clk),
+        .CE(count0_carry__0_n_3),
+        .D(\pause_counter.count_reg[8]_i_1_n_6 ),
+        .Q(\pause_counter.count_reg [9]),
+        .R(\pause_counter.count[0]_i_1_n_0 ));
+  LUT4 #(
+    .INIT(16'h0010)) 
+    \spi_tx_data[15]_i_1 
+       (.I0(count),
+        .I1(state__0),
+        .I2(flipflop_3),
+        .I3(flipflop_4),
+        .O(E));
 endmodule
 
 (* ORIG_REF_NAME = "pmod_dac_ad5541a" *) 
@@ -98,7 +474,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     dac_tx_ena,
     mosi_0,
     dac_data);
-  output ss_n;
+  output [0:0]ss_n;
   output busy;
   output sclk;
   output state_reg;
@@ -109,15 +485,12 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
   input mosi_0;
   input [15:0]dac_data;
 
-  wire \FSM_sequential_state[0]_i_1_n_0 ;
   wire \FSM_sequential_state[0]_i_2_n_0 ;
   wire \FSM_sequential_state[0]_i_3_n_0 ;
   wire busy;
-  wire busy_i_1__0_n_0;
   wire busy_i_2_n_0;
   wire busy_i_3_n_0;
   wire busy_i_4_n_0;
-  wire button_pressed;
   wire clk;
   wire count;
   wire count0_carry__0_n_0;
@@ -185,22 +558,15 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
   wire spi_master_0_n_3;
   wire spi_master_0_n_5;
   wire spi_tx_data;
-  wire ss_n;
-  wire [0:0]state;
+  wire [0:0]ss_n;
+  wire [0:0]state__0;
   wire state_reg;
+  wire tx_button_controller_n_0;
+  wire tx_button_controller_n_1;
   wire [15:0]tx_data;
   wire [3:0]NLW_count0_carry__2_CO_UNCONNECTED;
   wire [3:1]NLW_count0_carry__2_O_UNCONNECTED;
 
-  LUT5 #(
-    .INIT(32'hFECE3E0E)) 
-    \FSM_sequential_state[0]_i_1 
-       (.I0(button_pressed),
-        .I1(state),
-        .I2(count),
-        .I3(\FSM_sequential_state[0]_i_2_n_0 ),
-        .I4(busy_i_2_n_0),
-        .O(\FSM_sequential_state[0]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'hA888888888888888)) 
     \FSM_sequential_state[0]_i_2 
@@ -224,8 +590,8 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
        (.C(clk),
         .CE(1'b1),
         .CLR(reset),
-        .D(\FSM_sequential_state[0]_i_1_n_0 ),
-        .Q(state));
+        .D(tx_button_controller_n_1),
+        .Q(state__0));
   (* FSM_ENCODED_STATES = "pause:01,ready:10,start:00,send_data:11" *) 
   (* inverted = "yes" *) 
   FDPE #(
@@ -236,15 +602,6 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
         .D(spi_master_0_n_5),
         .PRE(reset),
         .Q(count));
-  LUT5 #(
-    .INIT(32'hF5FF5544)) 
-    busy_i_1__0
-       (.I0(state),
-        .I1(button_pressed),
-        .I2(busy_i_2_n_0),
-        .I3(count),
-        .I4(busy),
-        .O(busy_i_1__0_n_0));
   LUT5 #(
     .INIT(32'h00000001)) 
     busy_i_2
@@ -275,7 +632,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
   FDPE busy_reg
        (.C(clk),
         .CE(1'b1),
-        .D(busy_i_1__0_n_0),
+        .D(tx_button_controller_n_0),
         .PRE(reset),
         .Q(busy));
   (* ADDER_THRESHOLD = "35" *) 
@@ -315,7 +672,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h4051)) 
     \count[0]_i_1__0 
        (.I0(\count_reg_n_0_[0] ),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[0]_i_1__0_n_0 ));
@@ -324,7 +681,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[10]_i_1__0 
        (.I0(count0_carry__1_n_6),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[10]_i_1__0_n_0 ));
@@ -333,7 +690,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[11]_i_1__0 
        (.I0(count0_carry__1_n_5),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[11]_i_1__0_n_0 ));
@@ -342,7 +699,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[12]_i_1__0 
        (.I0(count0_carry__1_n_4),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[12]_i_1__0_n_0 ));
@@ -351,7 +708,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[13]_i_1__0 
        (.I0(count0_carry__2_n_7),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[13]_i_1__0_n_0 ));
@@ -360,7 +717,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[1]_i_1__0 
        (.I0(count0_carry_n_7),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[1]_i_1__0_n_0 ));
@@ -369,7 +726,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[2]_i_1__0 
        (.I0(count0_carry_n_6),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[2]_i_1__0_n_0 ));
@@ -378,7 +735,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[3]_i_1__0 
        (.I0(count0_carry_n_5),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[3]_i_1__0_n_0 ));
@@ -387,7 +744,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[4]_i_1__0 
        (.I0(count0_carry_n_4),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[4]_i_1__0_n_0 ));
@@ -396,7 +753,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[5]_i_1__0 
        (.I0(count0_carry__0_n_7),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[5]_i_1__0_n_0 ));
@@ -405,7 +762,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[6]_i_1__0 
        (.I0(count0_carry__0_n_6),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[6]_i_1__0_n_0 ));
@@ -414,7 +771,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[7]_i_1__0 
        (.I0(count0_carry__0_n_5),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[7]_i_1__0_n_0 ));
@@ -423,7 +780,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[8]_i_1__0 
        (.I0(count0_carry__0_n_4),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[8]_i_1__0_n_0 ));
@@ -432,7 +789,7 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
     .INIT(16'h80A2)) 
     \count[9]_i_1__0 
        (.I0(count0_carry__1_n_7),
-        .I1(state),
+        .I1(state__0),
         .I2(busy_i_2_n_0),
         .I3(\FSM_sequential_state[0]_i_2_n_0 ),
         .O(\count[9]_i_1__0_n_0 ));
@@ -575,15 +932,8 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
         .spi_busy_prev(spi_busy_prev),
         .spi_busy_prev_reg(spi_master_0_n_5),
         .ss_n(ss_n),
-        .state(state),
+        .state__0(state__0),
         .state_reg_0(state_reg));
-  LUT3 #(
-    .INIT(8'h04)) 
-    \spi_tx_data[15]_i_1 
-       (.I0(count),
-        .I1(button_pressed),
-        .I2(state),
-        .O(spi_tx_data));
   FDCE \spi_tx_data_reg[0] 
        (.C(clk),
         .CE(spi_tx_data),
@@ -680,18 +1030,24 @@ module design_1_pmod_dac_ad5541a_0_0_pmod_dac_ad5541a
         .CLR(reset),
         .D(dac_data[9]),
         .Q(tx_data[9]));
-  (* COUNTER_SIZE = "10000" *) 
   design_1_pmod_dac_ad5541a_0_0_button_debounce tx_button_controller
-       (.button_in(dac_tx_ena),
-        .button_out(button_pressed),
+       (.E(spi_tx_data),
+        .\FSM_sequential_state_reg[0] (\FSM_sequential_state[0]_i_2_n_0 ),
+        .busy(busy),
+        .busy_reg(busy_i_2_n_0),
         .clk(clk),
-        .reset(reset));
+        .count(count),
+        .dac_tx_ena(dac_tx_ena),
+        .flipflop_4_reg_0(tx_button_controller_n_0),
+        .flipflop_4_reg_1(tx_button_controller_n_1),
+        .reset(reset),
+        .state__0(state__0));
 endmodule
 
 (* ORIG_REF_NAME = "spi_master" *) 
 module design_1_pmod_dac_ad5541a_0_0_spi_master
-   (ss_n,
-    spi_busy,
+   (spi_busy,
+    ss_n,
     sclk,
     busy_reg_0,
     state_reg_0,
@@ -701,13 +1057,13 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     reset,
     \clk_ratio_reg[31]_0 ,
     spi_busy_prev,
-    state,
+    state__0,
     count,
     mosi_0,
     Q,
     \FSM_sequential_state_reg[1]_inv );
-  output ss_n;
   output spi_busy;
+  output [0:0]ss_n;
   output sclk;
   output busy_reg_0;
   output state_reg_0;
@@ -717,7 +1073,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   input reset;
   input \clk_ratio_reg[31]_0 ;
   input spi_busy_prev;
-  input [0:0]state;
+  input [0:0]state__0;
   input count;
   input mosi_0;
   input [15:0]Q;
@@ -852,12 +1208,12 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   wire spi_busy;
   wire spi_busy_prev;
   wire spi_busy_prev_reg;
-  wire ss_n;
-  wire ss_n_i_1_n_0;
-  wire [0:0]state;
-  wire state_0;
+  wire [0:0]ss_n;
+  wire \ss_n[0]_i_1_n_0 ;
+  wire [0:0]state__0;
   wire state_i_1_n_0;
   wire state_reg_0;
+  wire state_reg_n_0;
   wire \tx_buffer[0]_i_1_n_0 ;
   wire \tx_buffer[10]_i_1_n_0 ;
   wire \tx_buffer[11]_i_1_n_0 ;
@@ -900,19 +1256,19 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   wire [3:3]NLW_count0_carry__6_O_UNCONNECTED;
 
   LUT5 #(
-    .INIT(32'hFF200F20)) 
+    .INIT(32'hF2F002F0)) 
     \FSM_sequential_state[1]_inv_i_1 
        (.I0(spi_busy_prev),
         .I1(spi_busy),
-        .I2(state),
-        .I3(count),
+        .I2(count),
+        .I3(state__0),
         .I4(\FSM_sequential_state_reg[1]_inv ),
         .O(spi_busy_prev_reg));
   (* SOFT_HLUTNM = "soft_lutpair5" *) 
   LUT2 #(
     .INIT(4'h7)) 
     assert_data_i_1
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(assert_data),
         .O(assert_data_i_1_n_0));
   FDCE assert_data_reg
@@ -1026,7 +1382,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     busy_i_1
        (.I0(busy115_out),
         .I1(busy1),
-        .I2(state_0),
+        .I2(state_reg_n_0),
         .I3(\clk_ratio_reg[31]_0 ),
         .O(busy_i_1_n_0));
   FDPE busy_reg
@@ -1039,7 +1395,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'hF4)) 
     \clk_ratio[0]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(\clk_ratio_reg[31]_0 ),
         .I2(clk_ratio[0]),
         .O(\clk_ratio[0]_i_1_n_0 ));
@@ -1048,7 +1404,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hD0)) 
     \clk_ratio[31]_i_1 
        (.I0(\clk_ratio_reg[31]_0 ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(clk_ratio[31]),
         .O(\clk_ratio[31]_i_1_n_0 ));
   FDPE #(
@@ -1070,7 +1426,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \clk_toggles[0]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(\clk_toggles_reg_n_0_[0] ),
         .I2(\clk_toggles[5]_i_3_n_0 ),
         .O(\clk_toggles[0]_i_1_n_0 ));
@@ -1078,7 +1434,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT4 #(
     .INIT(16'h0880)) 
     \clk_toggles[1]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(\clk_toggles[5]_i_3_n_0 ),
         .I2(\clk_toggles_reg_n_0_[0] ),
         .I3(\clk_toggles_reg_n_0_[1] ),
@@ -1087,7 +1443,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT5 #(
     .INIT(32'h08888000)) 
     \clk_toggles[2]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(\clk_toggles[5]_i_3_n_0 ),
         .I2(\clk_toggles_reg_n_0_[0] ),
         .I3(\clk_toggles_reg_n_0_[1] ),
@@ -1096,7 +1452,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT6 #(
     .INIT(64'h0888888880000000)) 
     \clk_toggles[3]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(\clk_toggles[5]_i_3_n_0 ),
         .I2(\clk_toggles_reg_n_0_[1] ),
         .I3(\clk_toggles_reg_n_0_[0] ),
@@ -1107,7 +1463,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT4 #(
     .INIT(16'h0880)) 
     \clk_toggles[4]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(\clk_toggles[5]_i_3_n_0 ),
         .I2(\clk_toggles[5]_i_4_n_0 ),
         .I3(\clk_toggles_reg_n_0_[4] ),
@@ -1116,14 +1472,14 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \clk_toggles[5]_i_1 
        (.I0(busy1),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(\clk_ratio_reg[31]_0 ),
         .O(\clk_toggles[5]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT5 #(
     .INIT(32'h08888000)) 
     \clk_toggles[5]_i_2 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(\clk_toggles[5]_i_3_n_0 ),
         .I2(\clk_toggles[5]_i_4_n_0 ),
         .I3(\clk_toggles_reg_n_0_[4] ),
@@ -1264,13 +1620,13 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     \count[0]_i_1 
        (.I0(\count_reg_n_0_[0] ),
         .I1(busy1),
-        .I2(state_0),
+        .I2(state_reg_n_0),
         .O(p_1_in[0]));
   (* SOFT_HLUTNM = "soft_lutpair10" *) 
   LUT3 #(
     .INIT(8'h20)) 
     \count[10]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[10]),
         .O(p_1_in[10]));
@@ -1278,7 +1634,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[11]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[11]),
         .O(p_1_in[11]));
@@ -1286,7 +1642,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[12]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[12]),
         .O(p_1_in[12]));
@@ -1294,7 +1650,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[13]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[13]),
         .O(p_1_in[13]));
@@ -1302,7 +1658,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[14]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[14]),
         .O(p_1_in[14]));
@@ -1310,7 +1666,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[15]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[15]),
         .O(p_1_in[15]));
@@ -1318,7 +1674,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[16]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[16]),
         .O(p_1_in[16]));
@@ -1326,7 +1682,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[17]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[17]),
         .O(p_1_in[17]));
@@ -1334,7 +1690,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[18]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[18]),
         .O(p_1_in[18]));
@@ -1342,7 +1698,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[19]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[19]),
         .O(p_1_in[19]));
@@ -1350,7 +1706,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[1]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[1]),
         .O(p_1_in[1]));
@@ -1358,7 +1714,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[20]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[20]),
         .O(p_1_in[20]));
@@ -1366,7 +1722,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[21]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[21]),
         .O(p_1_in[21]));
@@ -1374,7 +1730,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[22]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[22]),
         .O(p_1_in[22]));
@@ -1382,7 +1738,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[23]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[23]),
         .O(p_1_in[23]));
@@ -1390,7 +1746,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[24]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[24]),
         .O(p_1_in[24]));
@@ -1398,7 +1754,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[25]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[25]),
         .O(p_1_in[25]));
@@ -1406,7 +1762,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[26]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[26]),
         .O(p_1_in[26]));
@@ -1414,7 +1770,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[27]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[27]),
         .O(p_1_in[27]));
@@ -1422,7 +1778,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[28]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[28]),
         .O(p_1_in[28]));
@@ -1430,7 +1786,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[29]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[29]),
         .O(p_1_in[29]));
@@ -1438,7 +1794,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[2]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[2]),
         .O(p_1_in[2]));
@@ -1446,20 +1802,20 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[30]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[30]),
         .O(p_1_in[30]));
   LUT2 #(
     .INIT(4'hE)) 
     \count[31]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(\clk_ratio_reg[31]_0 ),
         .O(\count[31]_i_1_n_0 ));
   LUT3 #(
     .INIT(8'h20)) 
     \count[31]_i_2 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[31]),
         .O(p_1_in[31]));
@@ -1467,7 +1823,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[3]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[3]),
         .O(p_1_in[3]));
@@ -1475,7 +1831,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[4]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[4]),
         .O(p_1_in[4]));
@@ -1483,7 +1839,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[5]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[5]),
         .O(p_1_in[5]));
@@ -1491,7 +1847,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[6]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[6]),
         .O(p_1_in[6]));
@@ -1499,7 +1855,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[7]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[7]),
         .O(p_1_in[7]));
@@ -1507,7 +1863,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[8]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[8]),
         .O(p_1_in[8]));
@@ -1515,7 +1871,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
   LUT3 #(
     .INIT(8'h20)) 
     \count[9]_i_1 
-       (.I0(state_0),
+       (.I0(state_reg_n_0),
         .I1(busy1),
         .I2(count0[9]),
         .O(p_1_in[9]));
@@ -1781,7 +2137,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
        (.I0(last_bit_rx),
         .I1(reset),
         .I2(\clk_ratio_reg[31]_0 ),
-        .I3(state_0),
+        .I3(state_reg_n_0),
         .O(\last_bit_rx[4]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
@@ -1804,7 +2160,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
        (.I0(busy115_out),
         .I1(mosi0__0),
         .I2(busy1),
-        .I3(state_0),
+        .I3(state_reg_n_0),
         .I4(mosi_0),
         .O(state_reg_0));
   LUT6 #(
@@ -1814,7 +2170,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
         .I1(busy115_out),
         .I2(mosi0__0),
         .I3(busy1),
-        .I4(state_0),
+        .I4(state_reg_n_0),
         .I5(mosi_tristate_oe_reg_n_0),
         .O(mosi_tristate_oe_i_1_n_0));
   FDRE mosi_tristate_oe_reg
@@ -1828,7 +2184,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     sclk_i_1
        (.I0(busy1),
         .I1(sclk_i_2_n_0),
-        .I2(state_0),
+        .I2(state_reg_n_0),
         .I3(\clk_ratio_reg[31]_0 ),
         .I4(sclk),
         .O(sclk_i_1_n_0));
@@ -1853,21 +2209,21 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     spi_ena_i_1
        (.I0(spi_busy),
         .I1(spi_busy_prev),
-        .I2(state),
+        .I2(state__0),
         .I3(count),
         .I4(\clk_ratio_reg[31]_0 ),
         .O(busy_reg_0));
   (* SOFT_HLUTNM = "soft_lutpair0" *) 
   LUT3 #(
     .INIT(8'h8F)) 
-    ss_n_i_1
+    \ss_n[0]_i_1 
        (.I0(busy115_out),
         .I1(busy1),
-        .I2(state_0),
-        .O(ss_n_i_1_n_0));
+        .I2(state_reg_n_0),
+        .O(\ss_n[0]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'h0000000000001000)) 
-    ss_n_i_2
+    \ss_n[0]_i_2 
        (.I0(\clk_toggles_reg_n_0_[1] ),
         .I1(\clk_toggles_reg_n_0_[4] ),
         .I2(\clk_toggles_reg_n_0_[5] ),
@@ -1875,10 +2231,10 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
         .I4(\clk_toggles_reg_n_0_[3] ),
         .I5(\clk_toggles_reg_n_0_[2] ),
         .O(busy115_out));
-  FDPE ss_n_reg
+  FDPE \ss_n_reg[0] 
        (.C(clk),
         .CE(1'b1),
-        .D(ss_n_i_1_n_0),
+        .D(\ss_n[0]_i_1_n_0 ),
         .PRE(reset),
         .Q(ss_n));
   (* SOFT_HLUTNM = "soft_lutpair3" *) 
@@ -1887,7 +2243,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     state_i_1
        (.I0(busy1),
         .I1(busy115_out),
-        .I2(state_0),
+        .I2(state_reg_n_0),
         .I3(\clk_ratio_reg[31]_0 ),
         .O(state_i_1_n_0));
   FDCE state_reg
@@ -1895,20 +2251,20 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
         .CE(1'b1),
         .CLR(reset),
         .D(state_i_1_n_0),
-        .Q(state_0));
+        .Q(state_reg_n_0));
   (* SOFT_HLUTNM = "soft_lutpair21" *) 
   LUT2 #(
     .INIT(4'h2)) 
     \tx_buffer[0]_i_1 
        (.I0(Q[0]),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .O(\tx_buffer[0]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair26" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \tx_buffer[10]_i_1 
        (.I0(\tx_buffer_reg_n_0_[9] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[10]),
         .O(\tx_buffer[10]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair26" *) 
@@ -1916,7 +2272,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[11]_i_1 
        (.I0(\tx_buffer_reg_n_0_[10] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[11]),
         .O(\tx_buffer[11]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair27" *) 
@@ -1924,7 +2280,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[12]_i_1 
        (.I0(\tx_buffer_reg_n_0_[11] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[12]),
         .O(\tx_buffer[12]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair27" *) 
@@ -1932,7 +2288,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[13]_i_1 
        (.I0(\tx_buffer_reg_n_0_[12] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[13]),
         .O(\tx_buffer[13]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair28" *) 
@@ -1940,7 +2296,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[14]_i_1 
        (.I0(\tx_buffer_reg_n_0_[13] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[14]),
         .O(\tx_buffer[14]_i_1_n_0 ));
   LUT4 #(
@@ -1948,7 +2304,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     \tx_buffer[15]_i_1 
        (.I0(busy1),
         .I1(mosi0__0),
-        .I2(state_0),
+        .I2(state_reg_n_0),
         .I3(\clk_ratio_reg[31]_0 ),
         .O(\tx_buffer[15]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair28" *) 
@@ -1956,7 +2312,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[15]_i_2 
        (.I0(\tx_buffer_reg_n_0_[14] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[15]),
         .O(\tx_buffer[15]_i_2_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair5" *) 
@@ -1982,7 +2338,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[1]_i_1 
        (.I0(\tx_buffer_reg_n_0_[0] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[1]),
         .O(\tx_buffer[1]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair22" *) 
@@ -1990,7 +2346,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[2]_i_1 
        (.I0(\tx_buffer_reg_n_0_[1] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[2]),
         .O(\tx_buffer[2]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair22" *) 
@@ -1998,7 +2354,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[3]_i_1 
        (.I0(\tx_buffer_reg_n_0_[2] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[3]),
         .O(\tx_buffer[3]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair23" *) 
@@ -2006,7 +2362,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[4]_i_1 
        (.I0(\tx_buffer_reg_n_0_[3] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[4]),
         .O(\tx_buffer[4]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair23" *) 
@@ -2014,7 +2370,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[5]_i_1 
        (.I0(\tx_buffer_reg_n_0_[4] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[5]),
         .O(\tx_buffer[5]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair24" *) 
@@ -2022,7 +2378,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[6]_i_1 
        (.I0(\tx_buffer_reg_n_0_[5] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[6]),
         .O(\tx_buffer[6]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair24" *) 
@@ -2030,7 +2386,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[7]_i_1 
        (.I0(\tx_buffer_reg_n_0_[6] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[7]),
         .O(\tx_buffer[7]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair25" *) 
@@ -2038,7 +2394,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[8]_i_1 
        (.I0(\tx_buffer_reg_n_0_[7] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[8]),
         .O(\tx_buffer[8]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair25" *) 
@@ -2046,7 +2402,7 @@ module design_1_pmod_dac_ad5541a_0_0_spi_master
     .INIT(8'hB8)) 
     \tx_buffer[9]_i_1 
        (.I0(\tx_buffer_reg_n_0_[8] ),
-        .I1(state_0),
+        .I1(state_reg_n_0),
         .I2(Q[9]),
         .O(\tx_buffer[9]_i_1_n_0 ));
   FDCE \tx_buffer_reg[0] 

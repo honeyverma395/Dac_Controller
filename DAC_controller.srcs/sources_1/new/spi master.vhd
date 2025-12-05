@@ -23,7 +23,7 @@ ENTITY spi_master IS
     miso    : IN     STD_LOGIC;                             --dada rebuda del slave
 
     sclk    : BUFFER STD_LOGIC;                                --sortida del clock SPI
-    ss_n    : OUT    STD_LOGIC;      --selecció dels slaves
+    ss_n    : BUFFER STD_LOGIC_VECTOR(slaves-1 DOWNTO 0);      --selecció dels slaves
     mosi    : OUT    STD_LOGIC;                             --sortida MOSI
 
     busy    : OUT    STD_LOGIC;                             --1: ocupat, 0: lliure
@@ -55,7 +55,7 @@ BEGIN
     -- RESET 
     IF reset = '1' THEN
       busy      <= '1';
-      ss_n      <= '1';
+      ss_n      <= (OTHERS =>'1');
       mosi      <= 'Z';
       rx_data   <= (OTHERS => '0');
       state     <= ready;
@@ -73,7 +73,7 @@ BEGIN
         -- ESTAT READY: esperem a ENABLE
         WHEN ready =>
           busy       <= '0';                --master disponible
-          ss_n       <= '1';    --cap slave seleccionat
+          ss_n       <= (OTHERS=>'1');    --cap slave seleccionat
           mosi       <= 'Z';                --MOSI en alta impedància
           continue_f <= '0';
 
@@ -114,7 +114,7 @@ BEGIN
         WHEN execute =>
 
           busy <= '1';
-          ss_n <= '0';           --activar slave
+          ss_n(slave_sel) <= '0';           --activar slave
 
           -- GENERACIÓ DEL CLOCK SPI (divisor)
           IF count = clk_ratio THEN
@@ -160,7 +160,7 @@ BEGIN
             -- FINAL NORMAL DE LA TRANSMISSIÓ
             IF clk_toggles = d_width*2 + 1 AND cont = '0' THEN
               busy    <= '0';
-              ss_n    <= '1';
+              ss_n    <= (OTHERS=>'1');
               mosi    <= 'Z';
               rx_data <= rx_buffer;
               state   <= ready;

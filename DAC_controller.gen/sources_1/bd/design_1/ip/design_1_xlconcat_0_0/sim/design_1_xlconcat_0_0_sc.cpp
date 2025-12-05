@@ -61,7 +61,7 @@ design_1_xlconcat_0_0_sc::design_1_xlconcat_0_0_sc(const sc_core::sc_module_name
 
   // initialize module
     xsc::common_cpp::properties model_param_props;
-    model_param_props.addLong("IN0_WIDTH", "16");
+    model_param_props.addLong("IN0_WIDTH", "4");
     model_param_props.addLong("IN1_WIDTH", "12");
     model_param_props.addLong("IN2_WIDTH", "1");
     model_param_props.addLong("IN3_WIDTH", "1");
@@ -190,7 +190,7 @@ design_1_xlconcat_0_0_sc::design_1_xlconcat_0_0_sc(const sc_core::sc_module_name
     model_param_props.addLong("IN126_WIDTH", "1");
     model_param_props.addLong("IN127_WIDTH", "1");
     model_param_props.addLong("dout_width", "16");
-    model_param_props.addLong("NUM_PORTS", "1");
+    model_param_props.addLong("NUM_PORTS", "2");
     model_param_props.addString("COMPONENT_NAME", "design_1_xlconcat_0_0");
 
   mp_impl = new design_1_xlconcat_0_0_core("inst", model_param_props);

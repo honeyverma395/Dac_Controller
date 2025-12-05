@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Fri Dec  5 12:38:27 2025
+# Process ID: 96371
+# Current directory: /home/hverma/Projects/DAC_controller/DAC_controller.runs/impl_1
+# Command line: vivado -log design_1_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source design_1_wrapper.tcl -notrace
+# Log file: /home/hverma/Projects/DAC_controller/DAC_controller.runs/impl_1/design_1_wrapper.vdi
+# Journal file: /home/hverma/Projects/DAC_controller/DAC_controller.runs/impl_1/vivado.jou
+# Running On        :HV-laptop
+# Platform          :Ubuntu
+# Operating System  :Ubuntu 24.04.3 LTS
+# Processor Detail  :AMD Ryzen 7 250 w/ Radeon 780M Graphics
+# CPU Frequency     :1913.832 MHz
+# CPU Physical cores:8
+# CPU Logical cores :16
+# Host memory       :31164 MB
+# Swap memory       :8589 MB
+# Total Virtual     :39753 MB
+# Available Virtual :34207 MB
+#-----------------------------------------------------------
+source design_1_wrapper.tcl -notrace

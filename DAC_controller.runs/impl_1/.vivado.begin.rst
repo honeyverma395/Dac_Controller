@@ -1,35 +1,10 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="hverma" Host="HV-laptop" Pid="405355" HostCore="16" HostMemory="30433624">
+    <Process Command="vivado" Owner="hverma" Host="HV-laptop" Pid="96299" HostCore="16" HostMemory="30433620">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="hverma" Host="HV-laptop" Pid="412934" HostCore="16" HostMemory="30433624">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="hverma" Host="HV-laptop" Pid="426305" HostCore="16" HostMemory="30433624">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="hverma" Host="HV-laptop" Pid="440448" HostCore="16" HostMemory="30433624">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="hverma" Host="HV-laptop" Pid="451287" HostCore="16" HostMemory="30433624">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="hverma" Host="HV-laptop" Pid="451550" HostCore="16" HostMemory="30433624">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="hverma" Host="HV-laptop" Pid="452921" HostCore="16" HostMemory="30433624">
+    <Process Command="vivado" Owner="hverma" Host="HV-laptop" Pid="108252" HostCore="16" HostMemory="30433620">
     </Process>
 </ProcessHandle>

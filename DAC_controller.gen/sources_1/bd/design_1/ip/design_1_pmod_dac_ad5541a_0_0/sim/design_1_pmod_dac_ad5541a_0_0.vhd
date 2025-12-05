@@ -64,7 +64,7 @@ ENTITY design_1_pmod_dac_ad5541a_0_0 IS
     ldac_n : OUT STD_LOGIC;
     mosi : OUT STD_LOGIC;
     sclk : OUT STD_LOGIC;
-    ss_n : OUT STD_LOGIC
+    ss_n : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
   );
 END design_1_pmod_dac_ad5541a_0_0;
 
@@ -74,7 +74,8 @@ ARCHITECTURE design_1_pmod_dac_ad5541a_0_0_arch OF design_1_pmod_dac_ad5541a_0_0
   COMPONENT pmod_dac_ad5541a IS
     GENERIC (
       clk_freq : INTEGER;
-      spi_clk_div : INTEGER
+      spi_clk_div : INTEGER;
+      slaves : INTEGER
     );
     PORT (
       clk : IN STD_LOGIC;
@@ -86,7 +87,7 @@ ARCHITECTURE design_1_pmod_dac_ad5541a_0_0_arch OF design_1_pmod_dac_ad5541a_0_0
       ldac_n : OUT STD_LOGIC;
       mosi : OUT STD_LOGIC;
       sclk : OUT STD_LOGIC;
-      ss_n : OUT STD_LOGIC
+      ss_n : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
     );
   END COMPONENT pmod_dac_ad5541a;
   ATTRIBUTE X_INTERFACE_INFO : STRING;
@@ -99,7 +100,8 @@ BEGIN
   U0 : pmod_dac_ad5541a
     GENERIC MAP (
       clk_freq => 100,
-      spi_clk_div => 1
+      spi_clk_div => 1,
+      slaves => 1
     )
     PORT MAP (
       clk => clk,
